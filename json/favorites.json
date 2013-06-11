@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Mojito",
+        "difficulty": 1,
+        "duration" : 20,
+        "creator_id": 2,
+        "author": "George",
+        "description": "Très parfumé, légèrement sucré et avec une pointe d'acidité, ce Cocktail élégant et cosmopolite a fait sa place parmi les grands classiques et c'est aujourd'hui le Cocktail le plus célèbre. Certaines variantes sont réalisées avec du citron jaune, ou sans eau gazeuse et en mettant des morceaux de citron vert au fond du verre, d'autres avec de la glace pilée ou avec un bitter, mais la recette originale est celle-ci.",
+        "recipe": "• Placer les feuilles de menthe dans le verre, ajoutez le sucre et le jus de citrons.Piler consciencieusement afin d'exprimer l'essence de la menthe sans la broyer. Ajouter le rhum, 4 glaçons et mélangez. Remplir la moitié restante du verre d'eau gazeuse. Mélanger doucement avec une paille. Voila, le Mojito est prêt.• Servir dans un verre de type 'tumbler'.• Décor: Décorer de feuilles de menthe fraîches et d'une tranche de citron.",
+        "picture_url" : "http://www.pariszigzag.fr/wp-content/themes/LondonLive/thumb.php?src=/wp-content/uploads/2011/07/mojito.jpg",
+        "ingredients": [
+            "3 cl of green lemon",
+            "limonade",
+            "2 coffee spoons of sugar",
+            "7 leaves of mint",
+            "6 cl of cuban rhum"
+        ]
+    },
+    {
+        "id": 1,
+        "name": "Mojito",
+        "difficulty": 1,
+        "duration" : 20,
+        "creator_id": 2,
+        "author": "George",
+        "description": "Très parfumé, légèrement sucré et avec une pointe d'acidité, ce Cocktail élégant et cosmopolite a fait sa place parmi les grands classiques et c'est aujourd'hui le Cocktail le plus célèbre. Certaines variantes sont réalisées avec du citron jaune, ou sans eau gazeuse et en mettant des morceaux de citron vert au fond du verre, d'autres avec de la glace pilée ou avec un bitter, mais la recette originale est celle-ci.",
+        "recipe": "• Placer les feuilles de menthe dans le verre, ajoutez le sucre et le jus de citrons.Piler consciencieusement afin d'exprimer l'essence de la menthe sans la broyer. Ajouter le rhum, 4 glaçons et mélangez. Remplir la moitié restante du verre d'eau gazeuse. Mélanger doucement avec une paille. Voila, le Mojito est prêt.• Servir dans un verre de type 'tumbler'.• Décor: Décorer de feuilles de menthe fraîches et d'une tranche de citron.",
+        "picture_url" : "http://www.pariszigzag.fr/wp-content/themes/LondonLive/thumb.php?src=/wp-content/uploads/2011/07/mojito.jpg",
+        "ingredients": [
+            "3 cl of green lemon",
+            "limonade",
+            "2 coffee spoons of sugar",
+            "7 leaves of mint",
+            "6 cl of cuban rhum"
+        ]
+    },
+    {
+        "id": 1,
+        "name": "Mojito",
+        "difficulty": 1,
+        "duration" : 20,
+        "creator_id": 2,
+        "author": "George",
+        "description": "Très parfumé, légèrement sucré et avec une pointe d'acidité, ce Cocktail élégant et cosmopolite a fait sa place parmi les grands classiques et c'est aujourd'hui le Cocktail le plus célèbre. Certaines variantes sont réalisées avec du citron jaune, ou sans eau gazeuse et en mettant des morceaux de citron vert au fond du verre, d'autres avec de la glace pilée ou avec un bitter, mais la recette originale est celle-ci.",
+        "recipe": "• Placer les feuilles de menthe dans le verre, ajoutez le sucre et le jus de citrons.Piler consciencieusement afin d'exprimer l'essence de la menthe sans la broyer. Ajouter le rhum, 4 glaçons et mélangez. Remplir la moitié restante du verre d'eau gazeuse. Mélanger doucement avec une paille. Voila, le Mojito est prêt.• Servir dans un verre de type 'tumbler'.• Décor: Décorer de feuilles de menthe fraîches et d'une tranche de citron.",
+        "picture_url" : "http://www.pariszigzag.fr/wp-content/themes/LondonLive/thumb.php?src=/wp-content/uploads/2011/07/mojito.jpg",
+        "ingredients": [
+            "3 cl of green lemon",
+            "limonade",
+            "2 coffee spoons of sugar",
+            "7 leaves of mint",
+            "6 cl of cuban rhum"
+        ]
+    }
+]

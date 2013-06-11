@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "name": "vodka"
+    },
+    {
+        "id": 2,
+        "name": "rhum"
+    },
+    {
+        "id": 3,
+        "name": "Tequila"
+    },
+    {
+        "id": 4,
+        "name": "Whisky"
+    },
+    {
+        "id": 5,
+        "name": "Amaretto"
+    },
+    {
+        "id": 6,
+        "name": "Lemon"
+    },
+    {
+        "id": 7,
+        "name": "Mint"
+    }
+
+]
