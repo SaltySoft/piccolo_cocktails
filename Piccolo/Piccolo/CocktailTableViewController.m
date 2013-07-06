@@ -147,7 +147,7 @@
     UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
     DetailedCocktailViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"detailedCocktailController"];
     [vc setCocktail:[_cocktails objectAtIndex:indexPath.row]];
-    [vc setAsDetailedView];
+//    [vc setAsDetailedView];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

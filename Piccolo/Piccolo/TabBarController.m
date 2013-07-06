@@ -13,6 +13,7 @@
 #import "FavoriteTableViewController.h"
 #import "SearchTableViewController.h"
 #import "DetailedCocktailViewController.h"
+#import "DayCocktailViewController.h"
 
 @interface TabBarController ()
 
@@ -32,6 +33,20 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [CocktailRequest getCocktailOfTheDayOnCompletion:^(Cocktail* c, NSError * error){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (c == nil) {
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alert show];
+            } else {
+                UINavigationController* nc = [self.viewControllers objectAtIndex:0];
+                DayCocktailViewController* ct = [nc.viewControllers objectAtIndex:0];
+                ct.cocktail = c;
+                [ct setViewAttributes];
+            }
+        });
+    }];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,40 +61,60 @@
     if (item.tag == 0) {
         [CocktailRequest getCocktailOfTheDayOnCompletion:^(Cocktail* c, NSError * error){
             dispatch_async(dispatch_get_main_queue(), ^{
-                UINavigationController* nc = [self.viewControllers objectAtIndex:0];
-                DetailedCocktailViewController* ct = [nc.viewControllers objectAtIndex:0];
-                ct.cocktail = c;
-                [ct setAsHomeView];
+                if (c == nil) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show];
+                } else {
+                    UINavigationController* nc = [self.viewControllers objectAtIndex:0];
+                    DayCocktailViewController* ct = [nc.viewControllers objectAtIndex:0];
+                    ct.cocktail = c;
+                    [ct setViewAttributes];
+                }
             });
         }];
     }
     if (item.tag == 1) {
         [CocktailRequest getCocktailListOnCompletion:^(NSArray * cocktails, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
-                UINavigationController* nc = [self.viewControllers objectAtIndex:1];
-                CocktailTableViewController* ct = [nc.viewControllers objectAtIndex:0];
-                ct.cocktails = [NSMutableArray arrayWithArray:cocktails];
-                [ct reloadData];
+                if (cocktails == nil) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show];
+                } else {
+                    UINavigationController* nc = [self.viewControllers objectAtIndex:1];
+                    CocktailTableViewController* ct = [nc.viewControllers objectAtIndex:0];
+                    ct.cocktails = [NSMutableArray arrayWithArray:cocktails];
+                    [ct reloadData];
+                }
             });
         }];
     }
     if (item.tag == 2) {
         [IngredientRequest getIngredientListOnCompletion:^(NSArray * ingredients, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
-                UINavigationController* nc = [self.viewControllers objectAtIndex:2];
-                SearchTableViewController* ct = [nc.viewControllers objectAtIndex:0];
-                [ct setIngredients:ingredients];
-                [ct initData];
+                if (ingredients == nil) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show];
+                } else {
+                    UINavigationController* nc = [self.viewControllers objectAtIndex:2];
+                    SearchTableViewController* ct = [nc.viewControllers objectAtIndex:0];
+                    [ct setIngredients:ingredients];
+                    [ct initData];
+                }
             });
         }];
     }
     if (item.tag == 3) {
         [CocktailRequest getFavoritesListOnCompletion:^(NSArray * favorites, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
-                UINavigationController* nc = [self.viewControllers objectAtIndex:3];
-                FavoriteTableViewController* ct = [nc.viewControllers objectAtIndex:0];
-                ct.cocktails = [NSMutableArray arrayWithArray:favorites];
-                [ct reloadData];
+                if (favorites == nil) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show];
+                } else {
+                    UINavigationController* nc = [self.viewControllers objectAtIndex:3];
+                    FavoriteTableViewController* ct = [nc.viewControllers objectAtIndex:0];
+                    ct.cocktails = [NSMutableArray arrayWithArray:favorites];
+                    [ct reloadData];
+                }
             });
         }];
     }

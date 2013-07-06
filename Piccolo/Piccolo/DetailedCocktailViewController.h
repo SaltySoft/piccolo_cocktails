@@ -7,27 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CocktailViewController.h"
 
-@class Cocktail;
-@interface DetailedCocktailViewController : UIViewController
+@interface DetailedCocktailViewController : CocktailViewController
 
-@property (nonatomic,retain) Cocktail* cocktail;
-@property (weak, nonatomic) IBOutlet UIImageView *image;
-@property (weak, nonatomic) IBOutlet UITextView *textView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *favoriteButton;
-
-@property (strong, nonatomic) UIImage* favoriteStar;
-@property (strong, nonatomic) UIImage* notFavoriteStar;
-@property (weak, nonatomic) IBOutlet UILabel *difficultyLabel;
-@property (weak, nonatomic) IBOutlet UILabel *preparationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *originalityLabel;
-
-@property BOOL isFavorite;
-
-- (IBAction)favoriteAction:(id)sender;
-
-- (void) setAsHomeView;
-
-- (void) setAsDetailedView;
 
 @end

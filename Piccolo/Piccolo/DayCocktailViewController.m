@@ -1,20 +1,18 @@
 //
-//  HomeViewController.m
+//  DayCocktailViewController.m
 //  Piccolo
 //
-//  Created by Irenicus on 05/06/13.
+//  Created by Irenicus on 06/07/13.
 //  Copyright (c) 2013 Salty Soft. All rights reserved.
 //
 
-#import "DetailedCocktailViewController.h"
-#import "Cocktail.h"
-#import "CocktailRequest.h"
+#import "DayCocktailViewController.h"
 
-@interface DetailedCocktailViewController ()
+@interface DayCocktailViewController ()
 
 @end
 
-@implementation DetailedCocktailViewController
+@implementation DayCocktailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,6 +27,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+}
+
+- (void) setViewAttributes
+{
+    [super setViewAttributes];
 }
 
 - (void)didReceiveMemoryWarning

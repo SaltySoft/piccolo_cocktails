@@ -24,9 +24,9 @@
                                             NSInteger originality = [[cocktailDic objectForKey:@"originality"] intValue];
                                             NSString * orStr = [Tools orinalityFromInteger:originality];
                                             NSMutableArray* ingredients = [[NSMutableArray alloc] init];
-                                            NSDictionary* ingredientsDic = [cocktailDic objectForKey:@"ingredients"];
-                                            for (NSString* ingredient in ingredientsDic) {
-                                                [ingredients addObject:ingredient];
+                                            NSDictionary* ingredientsArr = [cocktailDic objectForKey:@"ingredients"];
+                                            for (NSDictionary* ingredientDic in ingredientsArr) {
+                                                [ingredients addObject:[ingredientDic objectForKey:@"name"]];
                                             }
                                             Cocktail* c = [[Cocktail alloc] initWithId:[[cocktailDic objectForKey:@"id"] intValue]
                                                                             difficulty:diffStr
@@ -58,17 +58,18 @@
 
 + (void) getCocktailOfTheDayOnCompletion:(RequestCocktailCompletionHandler) complete
 {
-    [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/cocktail_of_the_day.json", SERVER_URL]
+    [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/Random", SERVER_URL]
                                     onCompletion:^(NSData * data, NSError *cocktailError){
                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                        NSLog(@"%@",requestResult);
                                         NSInteger difficulty = [[requestResult objectForKey:@"difficulty"] intValue];
                                         NSString * diffStr = [Tools difficultyFromInteger:difficulty];
                                         NSInteger originality = [[requestResult objectForKey:@"originality"] intValue];
                                         NSString * orStr = [Tools orinalityFromInteger:originality];
                                         NSMutableArray* ingredients = [[NSMutableArray alloc] init];
-                                        NSDictionary* ingredientsDic = [requestResult objectForKey:@"ingredients"];
-                                        for (NSString* ingredient in ingredientsDic) {
-                                            [ingredients addObject:ingredient];
+                                        NSDictionary* ingredientsArr = [requestResult objectForKey:@"ingredients"];
+                                        for (NSDictionary* ingredientDic in ingredientsArr) {
+                                            [ingredients addObject:[ingredientDic objectForKey:@"name"]];
                                         }
                                         Cocktail* c = [[Cocktail alloc] initWithId:[[requestResult objectForKey:@"id"] intValue]
                                                                         difficulty:diffStr
@@ -80,8 +81,10 @@
                                                                             recipe:[requestResult objectForKey:@"recipe"]
                                                                        picture_url:[requestResult objectForKey:@"picture_url"]
                                                                        ingredients:ingredients];
-                                        if (complete) {
+                                        if (complete && cocktailError == nil) {
                                             complete(c, cocktailError);
+                                        } else {
+                                            complete(nil, cocktailError);
                                         }
                                     }];
 }
