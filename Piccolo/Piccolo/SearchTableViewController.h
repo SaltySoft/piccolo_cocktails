@@ -12,6 +12,7 @@
 
 @property (nonatomic, retain) NSArray* ingredients;
 @property (nonatomic, retain) NSMutableArray* selectedIngredients;
+- (IBAction)searchAction:(id)sender;
 
 
 - (void) initData;

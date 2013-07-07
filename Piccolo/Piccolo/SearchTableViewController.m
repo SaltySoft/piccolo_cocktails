@@ -8,6 +8,8 @@
 
 #import "SearchTableViewController.h"
 #import "Ingredient.h"
+#import "CocktailsByIngredientTableViewController.h"
+#import "CocktailRequest.m"
 
 @interface SearchTableViewController ()
 
@@ -35,6 +37,20 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+
+- (IBAction)searchAction:(id)sender {
+    NSDictionary* ingredientsDic = nil;
+    [CocktailRequest cocktailsByIngredients:ingredientsDic OnCompletion:^(NSArray* array, NSError* error) {
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+            CocktailsByIngredientTableViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"CocktailsByIngredients"];
+            [vc setCocktails:[[NSMutableArray alloc] initWithArray:array]];
+            [self.navigationController pushViewController:vc animated:YES];
+            [vc reloadData];
+        });
+    }];
 }
 
 - (void) initData

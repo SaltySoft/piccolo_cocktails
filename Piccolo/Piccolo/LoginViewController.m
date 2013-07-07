@@ -8,8 +8,9 @@
 
 #import "LoginViewController.h"
 #import "LoggedViewController.h"
-
+#import "UserRequest.h"
 #import "User.h"
+#import "AppDelegate.h"
 
 @interface LoginViewController ()
 
@@ -54,17 +55,10 @@
 }
 
 - (void)registrationDidSuccess:(RegisterTableViewController *)controller
-                    didSuccess: (BOOL) result
+                    withUser: (User*) user
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        if (result) {
-            NSLog(@"sucess");
-            [self pushLoggeControllerWithUsername:@"test"];
-        } else {
-            NSLog(@"failure");
-            self.errorLabel.text = @"Failed to create a new account";
-            [self.errorLabel setHidden:NO];
-        }
+        [self pushLoggeControllerWithUsername:user.username];
     }];
 }
 
@@ -93,15 +87,38 @@
 
 - (void) logUserInWithUsername: (NSString*) username andPassword: (NSString*) password
 {
-    if ([self.loginField.text isEqualToString:username] && [self.passwordField.text isEqualToString:password]) {
-        [self pushLoggeControllerWithUsername:@"test"];
+    if (self.loginField.text.length > 0 && self.passwordField.text.length > 0) {
+        NSArray *keys = [[NSArray alloc] initWithObjects:
+                         @"name" ,
+                         @"password",
+                         nil];
+        NSArray *values = [[NSArray alloc] initWithObjects:username, password, nil];
+        NSDictionary* userForm = [[NSDictionary alloc] initWithObjects:values
+                                                               forKeys:keys];
+        [UserRequest loginUserWithUser:userForm onCompletion:^(User* user,NSString* token, NSString* error){
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (user != nil && token != nil) {
+                    [self pushLoggeControllerWithUsername:username];
+                    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                    [appDelegate setToken:token];
+                    [appDelegate setUser:user];
+                } else {
+                    if (error != nil) {
+                        self.errorLabel.text = error;
+                        [self.errorLabel setHidden:NO];
+                    }
+                }
+            });
+        }];
     } else {
+        self.errorLabel.text = @"You must provide a username and a password";
         [self.errorLabel setHidden:NO];
     }
 }
 
 - (IBAction)loginAction:(id)sender {
-    [self logUserInWithUsername:@"test" andPassword:@"test"];
+    [self logUserInWithUsername:self.loginField.text andPassword:self.passwordField.text];
+    [self hideKeyboard];
 }
 
 @end

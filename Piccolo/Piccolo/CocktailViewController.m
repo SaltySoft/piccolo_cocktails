@@ -8,6 +8,7 @@
 
 #import "CocktailViewController.h"
 #import "Cocktail.h"
+#import "AppDelegate.h"
 
 @interface CocktailViewController ()
 
@@ -24,6 +25,10 @@
     return self;
 }
 
+- (void) setTitle:(NSString*) title;
+{
+    self.navigationItem.title = title;
+}
 
 - (void)viewDidLoad
 {
@@ -32,7 +37,6 @@
     NSString *notFavoriteStarPath = [[NSBundle mainBundle] pathForResource:@"star_empty" ofType:@"png"];
     self.favoriteStar = [[UIImage alloc] initWithContentsOfFile:favoriteStarPath];
     self.notFavoriteStar = [[UIImage alloc] initWithContentsOfFile:notFavoriteStarPath];
-    [self addFavoriteButton];
 }
 
 - (void) addFavoriteButton
@@ -52,6 +56,12 @@
     self.originalityLabel.text = [_cocktail originality];
     self.difficultyLabel.text = [_cocktail difficulty];
     self.preparationLabel.text = [NSString stringWithFormat:@"%d minutes",_cocktail.duration];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([appDelegate isAuthenticated]) {
+        [self addFavoriteButton];
+    } else {
+        self.navigationItem.rightBarButtonItem = nil;
+    }
 }
 
 - (NSMutableAttributedString*) textViewStringForRecipesAndDescription
@@ -101,7 +111,6 @@
     
     [textViewResult appendAttributedString:descriptionString];
     [textViewResult appendAttributedString:descriptionDetail];
-    NSLog(@"desc %@", descriptionString);
     
     return textViewResult;
     

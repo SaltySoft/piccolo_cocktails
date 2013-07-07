@@ -12,6 +12,7 @@
 
 
 @protocol RegisterViewControllerDelegate;
+@class User;
 
 
 @interface RegisterTableViewController : UITableViewController
@@ -33,6 +34,6 @@
 
 - (void)registrationDidCancel:(RegisterTableViewController *)controller;
 - (void)registrationDidSuccess:(RegisterTableViewController *)controller
-                  didSuccess: (BOOL) result;
+                  withUser: (User*) user;
 
 @end

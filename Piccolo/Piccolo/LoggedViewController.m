@@ -7,6 +7,8 @@
 //
 
 #import "LoggedViewController.h"
+#import "UserRequest.h"
+#import "AppDelegate.h"
 
 @interface LoggedViewController ()
 
@@ -35,7 +37,14 @@
 
 - (void) logout
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [UserRequest logoutUserOnCompletion:^(NSString* message, NSError* error){
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.navigationController popToRootViewControllerAnimated:YES];
+            AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+            [appDelegate setUser:nil];
+            [appDelegate setToken:nil];
+        });
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,7 +55,7 @@
 
 - (void) updateLoggedLabel:(NSString*) username
 {
-    dispatch_async(dispatch_get_main_queue(),^{
+    dispatch_async(dispatch_get_main_queue(), ^{
         self.loggedLabel.text = [NSString stringWithFormat:@"You are logged as %@",username];
     });
 }

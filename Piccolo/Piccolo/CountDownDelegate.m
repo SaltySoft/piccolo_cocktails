@@ -18,8 +18,8 @@
     if (self) {
         self.minutes = [[NSMutableArray alloc] init];
         self.minutesStr = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 60; i++) {
-            [self.minutesStr addObject:[NSString stringWithFormat:@"%d minutes", i]];
+        for (int i = 2; i < 60; i++) {
+            [self.minutesStr addObject:[NSString stringWithFormat:@"Less than %d minutes", i]];
             [self.minutes addObject:[NSString stringWithFormat:@"%d", i]];
         }
         self.selectedRow = 0;

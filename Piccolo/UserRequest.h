@@ -7,7 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Defines.h"
+#import "RequestHandler.h"
+#import "User.h"
+
+typedef void (^RequestUserCompletionHandler)(User*,NSString*, NSString*);
 
 @interface UserRequest : NSObject
+
++ (void) createUserWithUser:(NSDictionary*)userDic onCompletion:(RequestUserCompletionHandler) complete;
+
++ (void) loginUserWithUser:(NSDictionary*)userDic onCompletion:(RequestUserCompletionHandler) complete;
+
++ (void) logoutUserOnCompletion: (RequestStringCompletionHandler) complete;
 
 @end

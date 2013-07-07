@@ -31,7 +31,6 @@
 		AD7550C6175E450800FBD43C /* search@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = AD7550C4175E450800FBD43C /* search@2X.png */; };
 		ADB8C08317672CCC00369584 /* star_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB8C08117672CCC00369584 /* star_empty.png */; };
 		ADB8C08417672CCC00369584 /* star_full.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB8C08217672CCC00369584 /* star_full.png */; };
-		ADBB1A59175F7CE100B465E1 /* DetailedCocktailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A58175F7CE100B465E1 /* DetailedCocktailViewController.m */; };
 		ADBB1A5F175F7D5500B465E1 /* CocktailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A5E175F7D5500B465E1 /* CocktailTableViewController.m */; };
 		ADBB1A62175F7D6F00B465E1 /* SearchTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A61175F7D6F00B465E1 /* SearchTableViewController.m */; };
 		ADBB1A65175F7D9900B465E1 /* FavoriteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A64175F7D9900B465E1 /* FavoriteTableViewController.m */; };
@@ -44,13 +43,14 @@
 		ADBB1A7F1760C56300B465E1 /* OriginalityDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A7E1760C56300B465E1 /* OriginalityDelegate.m */; };
 		ADBB1A821760E7AE00B465E1 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A811760E7AE00B465E1 /* TabBarController.m */; };
 		ADBB1A8A1760F4B900B465E1 /* CocktailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A891760F4B900B465E1 /* CocktailCell.m */; };
+		ADC643F9178A104300AD463D /* CocktailsByIngredientTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC643F8178A104300AD463D /* CocktailsByIngredientTableViewController.m */; };
 		ADCBAF1D1767792D004782EC /* RequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCBAF1C1767792C004782EC /* RequestHandler.m */; };
 		ADCBAF20176779AC004782EC /* CocktailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCBAF1F176779AC004782EC /* CocktailRequest.m */; };
 		ADCBAF23176779D1004782EC /* IngredientRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCBAF22176779D1004782EC /* IngredientRequest.m */; };
 		ADCD0FFD17661BC000986A7D /* account_cocktail.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD0FFC17661BC000986A7D /* account_cocktail.png */; };
-		ADDDDE6D1788C36B00B541B4 /* DayCocktailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDDDE6C1788C36B00B541B4 /* DayCocktailViewController.m */; };
 		ADDDDE701788C3DB00B541B4 /* CocktailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDDDE6F1788C3DB00B541B4 /* CocktailViewController.m */; };
 		ADDDDE781788D43000B541B4 /* login_cocktails.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDDDE771788D43000B541B4 /* login_cocktails.png */; };
+		ADDDDE7B1788E0BF00B541B4 /* UserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDDDE7A1788E0BF00B541B4 /* UserRequest.m */; };
 		ADE8179D1765C38000D49DC7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE8179C1765C38000D49DC7 /* LoginViewController.m */; };
 		ADE817A31765C5F900D49DC7 /* LoggedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE817A21765C5F900D49DC7 /* LoggedViewController.m */; };
 		ADE817A61765C6BF00D49DC7 /* RegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE817A51765C6BF00D49DC7 /* RegisterTableViewController.m */; };
@@ -87,8 +87,6 @@
 		AD7550C4175E450800FBD43C /* search@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2X.png"; sourceTree = "<group>"; };
 		ADB8C08117672CCC00369584 /* star_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_empty.png; sourceTree = "<group>"; };
 		ADB8C08217672CCC00369584 /* star_full.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = star_full.png; sourceTree = "<group>"; };
-		ADBB1A57175F7CE100B465E1 /* DetailedCocktailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailedCocktailViewController.h; sourceTree = "<group>"; };
-		ADBB1A58175F7CE100B465E1 /* DetailedCocktailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailedCocktailViewController.m; sourceTree = "<group>"; };
 		ADBB1A5D175F7D5500B465E1 /* CocktailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocktailTableViewController.h; sourceTree = "<group>"; };
 		ADBB1A5E175F7D5500B465E1 /* CocktailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocktailTableViewController.m; sourceTree = "<group>"; };
 		ADBB1A60175F7D6F00B465E1 /* SearchTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchTableViewController.h; sourceTree = "<group>"; };
@@ -113,6 +111,8 @@
 		ADBB1A881760F4B900B465E1 /* CocktailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocktailCell.h; sourceTree = "<group>"; };
 		ADBB1A891760F4B900B465E1 /* CocktailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocktailCell.m; sourceTree = "<group>"; };
 		ADBB1A8F1761D94400B465E1 /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		ADC643F7178A104300AD463D /* CocktailsByIngredientTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocktailsByIngredientTableViewController.h; sourceTree = "<group>"; };
+		ADC643F8178A104300AD463D /* CocktailsByIngredientTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocktailsByIngredientTableViewController.m; sourceTree = "<group>"; };
 		ADCBAF1B1767792C004782EC /* RequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestHandler.h; path = Piccolo/RequestHandler.h; sourceTree = "<group>"; };
 		ADCBAF1C1767792C004782EC /* RequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestHandler.m; path = Piccolo/RequestHandler.m; sourceTree = "<group>"; };
 		ADCBAF1E176779AC004782EC /* CocktailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocktailRequest.h; path = Piccolo/CocktailRequest.h; sourceTree = "<group>"; };
@@ -120,11 +120,11 @@
 		ADCBAF21176779D1004782EC /* IngredientRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IngredientRequest.h; path = Piccolo/IngredientRequest.h; sourceTree = "<group>"; };
 		ADCBAF22176779D1004782EC /* IngredientRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IngredientRequest.m; path = Piccolo/IngredientRequest.m; sourceTree = "<group>"; };
 		ADCD0FFC17661BC000986A7D /* account_cocktail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_cocktail.png; sourceTree = "<group>"; };
-		ADDDDE6B1788C36B00B541B4 /* DayCocktailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DayCocktailViewController.h; sourceTree = "<group>"; };
-		ADDDDE6C1788C36B00B541B4 /* DayCocktailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DayCocktailViewController.m; sourceTree = "<group>"; };
 		ADDDDE6E1788C3DB00B541B4 /* CocktailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocktailViewController.h; sourceTree = "<group>"; };
 		ADDDDE6F1788C3DB00B541B4 /* CocktailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocktailViewController.m; sourceTree = "<group>"; };
 		ADDDDE771788D43000B541B4 /* login_cocktails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_cocktails.png; sourceTree = "<group>"; };
+		ADDDDE791788E0BF00B541B4 /* UserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRequest.h; sourceTree = "<group>"; };
+		ADDDDE7A1788E0BF00B541B4 /* UserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRequest.m; sourceTree = "<group>"; };
 		ADE8179B1765C38000D49DC7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		ADE8179C1765C38000D49DC7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		ADE817A11765C5F900D49DC7 /* LoggedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggedViewController.h; sourceTree = "<group>"; };
@@ -262,6 +262,8 @@
 			children = (
 				ADBB1A60175F7D6F00B465E1 /* SearchTableViewController.h */,
 				ADBB1A61175F7D6F00B465E1 /* SearchTableViewController.m */,
+				ADC643F7178A104300AD463D /* CocktailsByIngredientTableViewController.h */,
+				ADC643F8178A104300AD463D /* CocktailsByIngredientTableViewController.m */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -270,10 +272,6 @@
 			isa = PBXGroup;
 			children = (
 				ADBB1A791760C49B00B465E1 /* Delegates */,
-				ADDDDE6B1788C36B00B541B4 /* DayCocktailViewController.h */,
-				ADDDDE6C1788C36B00B541B4 /* DayCocktailViewController.m */,
-				ADBB1A57175F7CE100B465E1 /* DetailedCocktailViewController.h */,
-				ADBB1A58175F7CE100B465E1 /* DetailedCocktailViewController.m */,
 				ADDDDE6E1788C3DB00B541B4 /* CocktailViewController.h */,
 				ADDDDE6F1788C3DB00B541B4 /* CocktailViewController.m */,
 				ADB8C07E176726B700369584 /* Search */,
@@ -329,6 +327,8 @@
 				ADCBAF1F176779AC004782EC /* CocktailRequest.m */,
 				ADCBAF21176779D1004782EC /* IngredientRequest.h */,
 				ADCBAF22176779D1004782EC /* IngredientRequest.m */,
+				ADDDDE791788E0BF00B541B4 /* UserRequest.h */,
+				ADDDDE7A1788E0BF00B541B4 /* UserRequest.m */,
 			);
 			name = RequestHandler;
 			path = ..;
@@ -447,7 +447,6 @@
 			files = (
 				AD755089175E348600FBD43C /* main.m in Sources */,
 				AD75508D175E348600FBD43C /* AppDelegate.m in Sources */,
-				ADBB1A59175F7CE100B465E1 /* DetailedCocktailViewController.m in Sources */,
 				ADBB1A5F175F7D5500B465E1 /* CocktailTableViewController.m in Sources */,
 				ADBB1A62175F7D6F00B465E1 /* SearchTableViewController.m in Sources */,
 				ADBB1A65175F7D9900B465E1 /* FavoriteTableViewController.m in Sources */,
@@ -467,8 +466,9 @@
 				ADCBAF1D1767792D004782EC /* RequestHandler.m in Sources */,
 				ADCBAF20176779AC004782EC /* CocktailRequest.m in Sources */,
 				ADCBAF23176779D1004782EC /* IngredientRequest.m in Sources */,
-				ADDDDE6D1788C36B00B541B4 /* DayCocktailViewController.m in Sources */,
 				ADDDDE701788C3DB00B541B4 /* CocktailViewController.m in Sources */,
+				ADDDDE7B1788E0BF00B541B4 /* UserRequest.m in Sources */,
+				ADC643F9178A104300AD463D /* CocktailsByIngredientTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

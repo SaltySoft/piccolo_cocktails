@@ -14,7 +14,7 @@
 
 + (void) getIngredientListOnCompletion:(RequestDataCompletionHandler) complete
 {
-    [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/ingredients.json", SERVER_URL]
+    [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Ingredients", SERVER_URL]
                                     onCompletion:^(NSData * data, NSError *ingredientError)
     {
         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data

@@ -11,10 +11,19 @@
 @implementation AppDelegate
 
 @synthesize user = _user;
+@synthesize token = _token;
+
+- (BOOL) isAuthenticated
+{
+    return _token != nil;
+}
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    _token = nil;
+    _user = nil;
     return YES;
 }
 							

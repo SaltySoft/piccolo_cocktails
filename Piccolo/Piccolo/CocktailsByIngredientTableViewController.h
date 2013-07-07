@@ -10,4 +10,9 @@
 
 @interface CocktailsByIngredientTableViewController : UITableViewController
 
+@property (nonatomic, retain) NSMutableArray* cocktails;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+- (void) reloadData;
+
 @end

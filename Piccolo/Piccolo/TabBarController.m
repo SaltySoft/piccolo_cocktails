@@ -12,8 +12,8 @@
 #import "CocktailTableViewController.h"
 #import "FavoriteTableViewController.h"
 #import "SearchTableViewController.h"
-#import "DetailedCocktailViewController.h"
-#import "DayCocktailViewController.h"
+#import "CocktailViewController.h"
+#import "LoginViewController.h"
 
 @interface TabBarController ()
 
@@ -40,13 +40,13 @@
                 [alert show];
             } else {
                 UINavigationController* nc = [self.viewControllers objectAtIndex:0];
-                DayCocktailViewController* ct = [nc.viewControllers objectAtIndex:0];
+                CocktailViewController* ct = [nc.viewControllers objectAtIndex:0];
                 ct.cocktail = c;
+                [ct setTitle:@"Cocktail of the day"];
                 [ct setViewAttributes];
             }
         });
     }];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -66,14 +66,15 @@
                     [alert show];
                 } else {
                     UINavigationController* nc = [self.viewControllers objectAtIndex:0];
-                    DayCocktailViewController* ct = [nc.viewControllers objectAtIndex:0];
+                    CocktailViewController* ct = [nc.viewControllers objectAtIndex:0];
                     ct.cocktail = c;
+                    [ct setTitle:@"Cocktail of the day"];
                     [ct setViewAttributes];
                 }
             });
         }];
     }
-    if (item.tag == 1) {
+    else if (item.tag == 1) {
         [CocktailRequest getCocktailListOnCompletion:^(NSArray * cocktails, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (cocktails == nil) {
@@ -88,7 +89,7 @@
             });
         }];
     }
-    if (item.tag == 2) {
+    else if (item.tag == 2) {
         [IngredientRequest getIngredientListOnCompletion:^(NSArray * ingredients, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
                 if (ingredients == nil) {
@@ -103,20 +104,18 @@
             });
         }];
     }
-    if (item.tag == 3) {
+    else if (item.tag == 3) {
         [CocktailRequest getFavoritesListOnCompletion:^(NSArray * favorites, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (favorites == nil) {
-                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                    [alert show];
-                } else {
                     UINavigationController* nc = [self.viewControllers objectAtIndex:3];
                     FavoriteTableViewController* ct = [nc.viewControllers objectAtIndex:0];
                     ct.cocktails = [NSMutableArray arrayWithArray:favorites];
                     [ct reloadData];
-                }
             });
         }];
+    }
+    else if (item.tag == 4) {
+        
     }
 }
 

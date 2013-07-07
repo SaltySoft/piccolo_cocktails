@@ -30,5 +30,7 @@
 
 - (void) setViewAttributes;
 
+- (void) setTitle:(NSString*) title;
+
 
 @end

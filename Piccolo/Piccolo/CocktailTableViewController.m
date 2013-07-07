@@ -9,7 +9,8 @@
 #import "CocktailTableViewController.h"
 #import "CocktailCell.h"
 #import "Cocktail.h"
-#import "DetailedCocktailViewController.h"
+#import "CocktailViewController.h"
+#import "AppDelegate.h"
 
 @interface CocktailTableViewController ()
 
@@ -55,12 +56,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (![appDelegate isAuthenticated]) {
+        self.navigationItem.leftBarButtonItem = nil;
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -145,11 +145,11 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    DetailedCocktailViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"detailedCocktailController"];
+    CocktailViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"cocktailController"];
     [vc setCocktail:[_cocktails objectAtIndex:indexPath.row]];
-//    [vc setAsDetailedView];
+    [vc setTitle:@"Detail"];
     [self.navigationController pushViewController:vc animated:YES];
-    
+    [vc setViewAttributes];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {

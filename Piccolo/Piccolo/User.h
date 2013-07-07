@@ -14,9 +14,12 @@
 
 @property (nonatomic, retain) NSString* username;
 @property (nonatomic, retain) NSString* email;
-@property (nonatomic, retain) NSString* password;
+@property (nonatomic, retain) NSString* hash;
 @property BOOL admin;
 
-@property (nonatomic, retain) NSMutableArray* favorites;
-
+- (id)initWithId:(NSInteger)id
+        username:(NSString *)username
+           email:(NSString *)email
+            hash:(NSString *)hash
+           admin:(BOOL)admin;
 @end

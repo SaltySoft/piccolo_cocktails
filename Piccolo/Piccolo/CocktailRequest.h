@@ -18,10 +18,11 @@ typedef void (^RequestCocktailCompletionHandler)(Cocktail*, NSError* );
 
 + (void) getCocktailOfTheDayOnCompletion:(RequestCocktailCompletionHandler) complete;
 
-+ (void) getCocktailListAtUrl: (NSString*) url OnCompletion:(RequestDataCompletionHandler) complete;
-
 + (void) getFavoritesListOnCompletion:(RequestDataCompletionHandler) complete;
 
 + (void) getCocktailListOnCompletion:(RequestDataCompletionHandler) complete;
+
++ (void) cocktailsByIngredients:(NSDictionary*) ingredients OnCompletion:(RequestDataCompletionHandler) complete;
+
 
 @end

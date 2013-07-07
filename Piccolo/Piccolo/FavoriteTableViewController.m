@@ -9,7 +9,7 @@
 #import "FavoriteTableViewController.h"
 #import "CocktailCell.h"
 #import "Cocktail.h"
-#import "DetailedCocktailViewController.h"
+#import "CocktailViewController.h"
 
 @interface FavoriteTableViewController ()
 
@@ -125,9 +125,11 @@
 {
     // Navigation logic may go here. Create and push another view controller.
     UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
-    DetailedCocktailViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"detailedCocktailController"];
+    CocktailViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"cocktailController"];
     [vc setCocktail:[_cocktails objectAtIndex:indexPath.row]];
+    [vc setTitle:@"Detail"];
     [self.navigationController pushViewController:vc animated:YES];
+    [vc setViewAttributes];
 }
 
 @end
