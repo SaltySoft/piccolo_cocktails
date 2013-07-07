@@ -11,7 +11,6 @@ class CocktailsController extends Controller
     public function index()
     {
         $this->render = false;
-
         header("Content-type: application/json");
 
         $em = Model::getEntityManager();
@@ -58,6 +57,21 @@ class CocktailsController extends Controller
         $cocktail = Cocktail::find($params["id"]);
 
         echo json_encode($cocktail->toArray());
+    }
+
+    public function byIngredients($params = array())
+    {
+        $this->render = false;
+        header("Content-type: application/json");
+
+        $em = Model::getEntityManager();
+
+        $qb = $em->createQueryBuilder();
+
+        $qb->select("c")
+            ->from("Cocktail", "c");
+
+        $cocktails = $qb->getQuery()->getResult();
     }
 
     public function update()

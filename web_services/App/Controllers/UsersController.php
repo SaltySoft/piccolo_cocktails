@@ -25,24 +25,58 @@ class UsersController extends Controller
 {
     function login($params = array())
     {
-        if (isset($_POST["name"]) && isset($_POST["password"])) {
-            $users = User::where(array("name" => $_POST["name"], "hash" => sha1($_POST["password"])));
+        $this->render = false;
+        header("Content-type: application/json");
+        $success = false;
+        $data = $this->getRequestData();
+        if (isset($data["name"]) && isset($data["password"])) {
+            $users = User::where(array("name" => $data["name"], "hash" => sha1($data["password"])));
             if (count($users) > 0) {
                 $user = $users[0];
                 $user->login();
+                $success = true;
+                $token = uniqid();
+                $_SESSION["token"] = $token;
+                echo json_encode(array(
+                        "user" => $user->toArray(),
+                        "token" => $token)
+                );
             }
         }
-
-        $this->redirect("/");
+        if (!$success)
+        {
+            header("HTTP/1.1 401 Unauthorized");
+            echo json_encode(array(
+                "error"=> "Your username / password is incorrect",
+            ));
+        }
     }
+
+//    function login($params = array())
+//    {
+//        if (isset($_POST["name"]) && isset($_POST["password"])) {
+//            $users = User::where(array("name" => $_POST["name"], "hash" => sha1($_POST["password"])));
+//            if (count($users) > 0) {
+//                $user = $users[0];
+//                $user->login();
+//            }
+//        }
+//
+//        $this->redirect("/");
+//    }
 
     function logout($params = array())
     {
+        $this->render = false;
+        header("Content-type: application/json");
         $user = User::current_user();
         if ($user != null) {
             $user->logout();
+            $_SESSION["token"] = null;
         }
-        $this->redirect("/");
+        echo json_encode(array(
+            "message"=> "Log out with success",
+        ));
     }
 
 
@@ -53,34 +87,66 @@ class UsersController extends Controller
 
     function create($params = array())
     {
+        $this->render = false;
+        header("Content-type: application/json");
+        $data = $this->getRequestData();
         $user = new User();
-        $usernames = User::where(array("name" => $_POST["name"]));
-        $usermail = User::where(array("email" => $_POST["mail"]));
+        $usernames = User::where(array("name" => $data["name"]));
+        $usermail = User::where(array("email" => $data["mail"]));
         if (count($usernames) == 0 && count($usermail) == 0)
         {
-            $user->setName($_POST["name"]);
-            $user->setMail($_POST["mail"]);
-            $users = User::where(array("admin" => 1));
-            if (count($users) == 0) {
-                $user->setAdmin();
-            }
-            else
-            {
-                $user->setNormal();
-            }
-
-            $user->setHash($_POST["password"]);
+            $user->setName($data["name"]);
+            $user->setMail($data["mail"]);
+            $user->setNormal();
+            $user->setHash($data["password"]);
             $user->save();
             $user->login();
-            $this->redirect("/");
+            $token = uniqid();
+            $_SESSION["token"] = $token;
+            echo json_encode(array(
+                "user" => $user->toArray(),
+                "token" => $token)
+            );
         }
         else
         {
-            $this->flash("This user already exists");
-            $this->redirect("/Users/login_form");
-            //error user exists
+            header("HTTP/1.1 405 Method Not Allowed");
+            echo json_encode(array(
+                    "error"=> "This username or mail already exists",
+            ));
         }
     }
+
+//    function create($params = array())
+//    {
+//        $user = new User();
+//        $usernames = User::where(array("name" => $_POST["name"]));
+//        $usermail = User::where(array("email" => $_POST["mail"]));
+//        if (count($usernames) == 0 && count($usermail) == 0)
+//        {
+//            $user->setName($_POST["name"]);
+//            $user->setMail($_POST["mail"]);
+//            $users = User::where(array("admin" => 1));
+//            if (count($users) == 0) {
+//                $user->setAdmin();
+//            }
+//            else
+//            {
+//                $user->setNormal();
+//            }
+//
+//            $user->setHash($_POST["password"]);
+//            $user->save();
+//            $user->login();
+//            $this->redirect("/");
+//        }
+//        else
+//        {
+//            $this->flash("This user already exists");
+//            $this->redirect("/Users/login_form");
+//            //error user exists
+//        }
+//    }
 
 
 
@@ -111,6 +177,102 @@ class UsersController extends Controller
         $this->set("message", $admin_created);
         */
     }
+
+    public function favorites($params = array())
+    {
+        $this->render = false;
+        header("Content-type: application/json");
+        $success = false;
+        if (isset($_GET["id"]) && isset($_GET["token"]) && $_GET["token"] == $_SESSION["token"])
+        {
+            $user = User::find($_GET["id"]);
+            if ($user != null) {
+                $favorites = array();
+                foreach ($user->getFavorites() as $favorite)
+                {
+                    $favorites[] = $favorite->toArray();
+                }
+                $success = true;
+            }
+            echo json_encode(array(
+                    "favorites" =>  $favorites,
+                    "token" => $_SESSION["token"])
+            );
+        }
+        if (!$success)
+        {
+            header("HTTP/1.1 404 Not Found");
+            echo json_encode(array(
+                "error"=> "You are not authenticated or the user doesn't exist",
+            ));
+        }
+    }
+
+    public  function addFavorite($params = array())
+    {
+        $this->render = false;
+        header("Content-type: application/json");
+        $data = $this->getRequestData();
+        $success = false;
+        if (isset($data["cocktail_id"])  && (isset($data["id"])
+            && isset($data["token"]) && $data["token"] == $_SESSION["token"]))
+        {
+            $user = User::find($data["id"]);
+//            $user->getFavorites()->add($data["id"],)
+            if ($user != null) {
+                $favorites = array();
+                foreach ($user->getFavorites() as $favorite)
+                {
+                    $favorites[] = $favorite->toArray();
+                }
+                $success = true;
+            }
+            echo json_encode(array(
+                    "favorites" =>  $favorites,
+                    "token" => $_SESSION["token"])
+            );
+        }
+        if (!$success)
+        {
+            header("HTTP/1.1 401 Unauthorized");
+            echo json_encode(array(
+                "error"=> "You are not authenticated",
+            ));
+        }
+    }
+
+    public  function removeFavorite($params = array())
+    {
+        $this->render = false;
+        header("Content-type: application/json");
+        $data = $this->getRequestData();
+        $success = false;
+        if (isset($data["id"]) && isset($data["token"]) && $data["token"] == $_SESSION["token"])
+        {
+            $user = User::find($data["id"]);
+//            $user->getFavorites()->add($data["id"])
+            if ($user != null) {
+                $favorites = array();
+                foreach ($user->getFavorites() as $favorite)
+                {
+                    $favorites[] = $favorite->toArray();
+                }
+                $success = true;
+            }
+            echo json_encode(array(
+                    "favorites" =>  $favorites,
+                    "token" => $_SESSION["token"])
+            );
+        }
+        if (!$success)
+        {
+            header("HTTP/1.1 401 Unauthorized");
+            echo json_encode(array(
+                "error"=> "You are not authenticated",
+            ));
+        }
+    }
+
 
     public function index()
     {

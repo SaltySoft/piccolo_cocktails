@@ -84,6 +84,11 @@ class Cocktail extends Model
     private $ingredients;
 
     /**
+     * @ManyToMany(targetEntity="User", inversedBy="favorites")
+     */
+    private $users;
+
+    /**
      * @Column(type="boolean")
      */
     private $alchool;

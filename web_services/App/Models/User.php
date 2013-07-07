@@ -76,6 +76,13 @@ class User extends UserBase
         return $this->name;
     }
 
+    public function getFavorites()
+    {
+        return $this->favorites;
+    }
+
+
+
 
     public function toArray()
     {
@@ -89,4 +96,6 @@ class User extends UserBase
 
         return $array;
     }
+
+
 }
