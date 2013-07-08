@@ -8,19 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "FilterTableViewController.h"
+#import "AddCocktailTableViewController.h"
 
-
-@interface CocktailTableViewController : UITableViewController <AddCocktailViewControllerDelegate>
+@interface CocktailTableViewController : UITableViewController <AddCocktailViewControllerDelegate, FilterCocktailViewControllerDelegate>
 
 @property (nonatomic, retain) NSMutableArray* cocktails;
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 
-- (IBAction)addCocktailAction:(id)sender;
-- (IBAction)filterCocktailAction:(id)sender;
-
-
 - (void) reloadData;
+
+- (void) addCocktailAction;
 
 @end

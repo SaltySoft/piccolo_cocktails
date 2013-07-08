@@ -39,9 +39,11 @@ class CocktailsController extends Controller
         $cocktail->setDifficulty($data["difficulty"]);
         $cocktail->setOriginality($data["originality"]);
         $cocktail->setDuration($data["duration"]);
-        $cocktail->setAuthor($data["author"]);
         $cocktail->setDescription($data["description"]);
         $cocktail->setRecipe($data["recipe"]);
+        if (isset($data["author"])) {
+            $cocktail->setAuthor($data["author"]);
+        }
         $cocktail->save();
         $this->render = false;
         header("Content-type: application/json");
@@ -64,14 +66,18 @@ class CocktailsController extends Controller
         $this->render = false;
         header("Content-type: application/json");
 
+        echo json_encode($params);
         $em = Model::getEntityManager();
 
         $qb = $em->createQueryBuilder();
 
-        $qb->select("c")
-            ->from("Cocktail", "c");
+//        $qb->select("c")
+//            ->from("Cocktail", "c")
+//            ->join("Ingredient")
+//            ->where("c.ingredient_id","?1");
 
         $cocktails = $qb->getQuery()->getResult();
+        echo json_encode($cocktails->toArray());
     }
 
     public function update()

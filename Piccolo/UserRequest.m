@@ -57,7 +57,6 @@
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/logout", SERVER_URL]
                                        withParams:[[NSDictionary alloc] init] onCompletion:^(NSData* data, NSError* error){
                                            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-                                           NSLog(@"%@", requestResult);
                                            NSString* response = [requestResult objectForKey:@"message"];
                                            if (error == nil) {
                                                complete(response,nil);

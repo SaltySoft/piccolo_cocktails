@@ -53,7 +53,6 @@
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSInteger userId = appDelegate.user.id;
     NSString* token = appDelegate.token;
-    NSLog(@"id %d",userId);
     [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/favorites?id=%d&token=%@", SERVER_URL, userId, token]
                                     onCompletion:^(NSData * data, NSError *cocktailError){
                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
@@ -120,21 +119,48 @@
                                     }];
 }
 
-+ (void) addFavorite:(NSInteger) cocktailId onCompletion:(RequestCocktailCompletionHandler) complete
-{
-    
-}
-
-+ (void) removeFavorite:(NSInteger) cocktailId onCompletion:(RequestCocktailCompletionHandler) complete
-{
-    
-}
+//+ (void) addFavorite:(NSInteger) cocktailId onCompletion:(RequestCocktailCompletionHandler) complete
+//{
+//    
+//}
+//
+//+ (void) removeFavorite:(NSInteger) cocktailId onCompletion:(RequestCocktailCompletionHandler) complete
+//{
+//    
+//}
 
 + (void) cocktailsByIngredients:(NSDictionary*) ingredients OnCompletion:(RequestDataCompletionHandler) complete
 {
-    [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/byIngredients", SERVER_URL]
-                                    onCompletion:^(NSData *data, NSError *cocktailError){
-                                        
+    [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/byIngredients", SERVER_URL] withParams:ingredients
+                                     onCompletion:^(NSData *data, NSError *cocktailError){
+                                        NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                        NSLog(@"%@",requestResult);
+                                        NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                                        for (NSDictionary* cocktailDic in requestResult) {
+                                            NSInteger difficulty = [[cocktailDic objectForKey:@"difficulty"] intValue];
+                                            NSString * diffStr = [Tools difficultyFromInteger:difficulty];
+                                            NSInteger originality = [[cocktailDic objectForKey:@"originality"] intValue];
+                                            NSString * orStr = [Tools orinalityFromInteger:originality];
+                                            NSMutableArray* ingredients = [[NSMutableArray alloc] init];
+                                            NSDictionary* ingredientsArr = [cocktailDic objectForKey:@"ingredients"];
+                                            for (NSDictionary* ingredientDic in ingredientsArr) {
+                                                [ingredients addObject:[ingredientDic objectForKey:@"name"]];
+                                            }
+                                            Cocktail* c = [[Cocktail alloc] initWithId:[[cocktailDic objectForKey:@"id"] intValue]
+                                                                            difficulty:diffStr
+                                                                           originality:orStr
+                                                                              duration:[[cocktailDic objectForKey:@"duration"] intValue]
+                                                                               creator:[cocktailDic objectForKey:@"author"]
+                                                                                  name:[cocktailDic objectForKey:@"name"]
+                                                                           description:[cocktailDic objectForKey:@"description"]
+                                                                                recipe:[cocktailDic objectForKey:@"recipe"]
+                                                                           picture_url:[cocktailDic objectForKey:@"picture_url"]
+                                                                           ingredients:ingredients];
+                                            [cocktailArray addObject:c];
+                                        }
+                                        if (complete) {
+                                            complete(cocktailArray, cocktailError);
+                                        }
      }];
 }
 

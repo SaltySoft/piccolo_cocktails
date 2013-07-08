@@ -1,28 +1,24 @@
 //
-//  FilterTableViewController.m
+//  AddCocktailTableViewController.m
 //  Piccolo
 //
-//  Created by Irenicus on 06/06/13.
+//  Created by Irenicus on 08/07/13.
 //  Copyright (c) 2013 Salty Soft. All rights reserved.
 //
 
-#import "FilterTableViewController.h"
-#import "Tools.h"
+#import "AddCocktailTableViewController.h"
 
-@interface FilterTableViewController ()
+@interface AddCocktailTableViewController ()
 
 @end
 
-@implementation FilterTableViewController
-@synthesize delegate = _delegate;
-
+@implementation AddCocktailTableViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
         // Custom initialization
-
     }
     return self;
 }
@@ -35,25 +31,23 @@
     [self.countDownDelegate setDelegate:self];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    [super hideKeyboard];
-    return YES;
-}
-
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
 }
 
 
+#pragma mark - Table view delegate
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [super tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath];
+    if (indexPath.section == 0) {
+        if (indexPath.row == 2) {
+            [self selectPhotos];
+        }
+    }
 }
-
-
-
 
 #pragma mark - Protocols
 
@@ -75,10 +69,28 @@
 }
 
 - (IBAction)cancelAction:(id)sender {
-    [_delegate filterCocktailDidCancel:self];
+    [_delegate addCocktailDidCancel:self];
 }
 
 - (IBAction)doneAction:(id)sender {
-    [_delegate filterCocktailDidSuccess:self];
+    [_delegate addCocktailDidCancel:self];
 }
+
+
+- (void)selectPhotos
+{
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+    picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    picker.delegate = self;
+    [self presentViewController:picker animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+        didFinishPickingImage:(UIImage *)image
+                  editingInfo:(NSDictionary *)editingInfo
+{
+    self.imageView.image = image;
+    [picker dismissModalViewControllerAnimated:YES];
+}
+
 @end

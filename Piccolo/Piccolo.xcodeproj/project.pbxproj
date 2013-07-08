@@ -44,6 +44,8 @@
 		ADBB1A821760E7AE00B465E1 /* TabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A811760E7AE00B465E1 /* TabBarController.m */; };
 		ADBB1A8A1760F4B900B465E1 /* CocktailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A891760F4B900B465E1 /* CocktailCell.m */; };
 		ADC643F9178A104300AD463D /* CocktailsByIngredientTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC643F8178A104300AD463D /* CocktailsByIngredientTableViewController.m */; };
+		ADC643FF178A3DEC00AD463D /* AddCocktailTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC643FE178A3DEC00AD463D /* AddCocktailTableViewController.m */; };
+		ADC64402178A49F400AD463D /* CocktailAttributesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC64401178A49F300AD463D /* CocktailAttributesViewController.m */; };
 		ADCBAF1D1767792D004782EC /* RequestHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCBAF1C1767792C004782EC /* RequestHandler.m */; };
 		ADCBAF20176779AC004782EC /* CocktailRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCBAF1F176779AC004782EC /* CocktailRequest.m */; };
 		ADCBAF23176779D1004782EC /* IngredientRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADCBAF22176779D1004782EC /* IngredientRequest.m */; };
@@ -113,6 +115,10 @@
 		ADBB1A8F1761D94400B465E1 /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		ADC643F7178A104300AD463D /* CocktailsByIngredientTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocktailsByIngredientTableViewController.h; sourceTree = "<group>"; };
 		ADC643F8178A104300AD463D /* CocktailsByIngredientTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocktailsByIngredientTableViewController.m; sourceTree = "<group>"; };
+		ADC643FD178A3DEC00AD463D /* AddCocktailTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddCocktailTableViewController.h; sourceTree = "<group>"; };
+		ADC643FE178A3DEC00AD463D /* AddCocktailTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddCocktailTableViewController.m; sourceTree = "<group>"; };
+		ADC64400178A49F300AD463D /* CocktailAttributesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocktailAttributesViewController.h; sourceTree = "<group>"; };
+		ADC64401178A49F300AD463D /* CocktailAttributesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocktailAttributesViewController.m; sourceTree = "<group>"; };
 		ADCBAF1B1767792C004782EC /* RequestHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RequestHandler.h; path = Piccolo/RequestHandler.h; sourceTree = "<group>"; };
 		ADCBAF1C1767792C004782EC /* RequestHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RequestHandler.m; path = Piccolo/RequestHandler.m; sourceTree = "<group>"; };
 		ADCBAF1E176779AC004782EC /* CocktailRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CocktailRequest.h; path = Piccolo/CocktailRequest.h; sourceTree = "<group>"; };
@@ -244,6 +250,10 @@
 				ADBB1A5E175F7D5500B465E1 /* CocktailTableViewController.m */,
 				ADBB1A761760BA8200B465E1 /* FilterTableViewController.h */,
 				ADBB1A771760BA8200B465E1 /* FilterTableViewController.m */,
+				ADC643FD178A3DEC00AD463D /* AddCocktailTableViewController.h */,
+				ADC643FE178A3DEC00AD463D /* AddCocktailTableViewController.m */,
+				ADC64400178A49F300AD463D /* CocktailAttributesViewController.h */,
+				ADC64401178A49F300AD463D /* CocktailAttributesViewController.m */,
 			);
 			name = Cocktails;
 			sourceTree = "<group>";
@@ -469,6 +479,8 @@
 				ADDDDE701788C3DB00B541B4 /* CocktailViewController.m in Sources */,
 				ADDDDE7B1788E0BF00B541B4 /* UserRequest.m in Sources */,
 				ADC643F9178A104300AD463D /* CocktailsByIngredientTableViewController.m in Sources */,
+				ADC643FF178A3DEC00AD463D /* AddCocktailTableViewController.m in Sources */,
+				ADC64402178A49F400AD463D /* CocktailAttributesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

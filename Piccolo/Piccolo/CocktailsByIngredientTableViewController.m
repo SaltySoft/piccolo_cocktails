@@ -7,6 +7,9 @@
 //
 
 #import "CocktailsByIngredientTableViewController.h"
+#import "CocktailCell.h"
+#import "Cocktail.h"
+#import "CocktailViewController.h"
 
 @interface CocktailsByIngredientTableViewController ()
 
@@ -60,12 +63,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
+    static NSString *CellIdentifier = @"searchCocktailCell";
+    CocktailCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    Cocktail* c = [_cocktails objectAtIndex:indexPath.row];
+    cell.name.text = [c name];
+    cell.difficulty.text = [c difficulty];
+    cell.image.image = [c picture];
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 70.0;
 }
 
 /*
@@ -111,6 +121,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    CocktailViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"cocktailController"];
+    [vc setCocktail:[_cocktails objectAtIndex:indexPath.row]];
+    [vc setTitle:@"Detail"];
+    [self.navigationController pushViewController:vc animated:YES];
+    [vc setViewAttributes];
 }
 
 @end

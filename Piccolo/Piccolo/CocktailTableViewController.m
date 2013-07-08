@@ -23,6 +23,12 @@
 - (void) reloadData
 {
     [self.tableView reloadData];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    if ([appDelegate isAuthenticated]) {
+        [self addFavoriteButton];
+    } else {
+        self.navigationItem.leftBarButtonItem = nil;
+    }
 }
 
 - (FilterTableViewController*) pushFilterView
@@ -33,22 +39,24 @@
     return vc;
 }
 
-- (IBAction)filterCocktailAction:(id)sender {
-    FilterTableViewController *vc = [self pushFilterView];
-    [vc filterCocktailController];
+- (void) addFavoriteButton
+{
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCocktailAction)];
 }
 
-- (IBAction)addCocktailAction:(id)sender {
-    FilterTableViewController *vc = [self pushFilterView];
-    [vc addNewCocktailController];
-
+- (void) addCocktailAction
+{
+    UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+    UINavigationController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"addCocktailNav"];
+    [self.navigationController presentViewController:vc animated:YES completion:NULL];
+    AddCocktailTableViewController* ac = [vc.childViewControllers objectAtIndex:0];
+    [ac setDelegate:self];
 }
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self) {
-        // Custom initialization
     }
     return self;
 }
@@ -66,20 +74,17 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
     return [_cocktails count];
 }
 
@@ -100,44 +105,6 @@
     return 70.0;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -153,26 +120,40 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"addCocktailSegue"]) {
-        FilterTableViewController *addCocktailController = (FilterTableViewController*)
+    if ([[segue identifier] isEqualToString:@"filterSegue"]) {
+        FilterTableViewController *fc = (FilterTableViewController*)
         [[[segue destinationViewController] viewControllers] objectAtIndex:0];
-        [addCocktailController addNewCocktailController];
-        addCocktailController.delegate = self;
+        fc.delegate = self;
     }
 }
 
 #pragma mark - Protocol AddCocktailViewControllerDelegate
 
 
-- (void) addCocktailDidCancel:(FilterTableViewController *)controller
+- (void) addCocktailDidCancel:(AddCocktailTableViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void) addCocktailDidSuccess:(FilterTableViewController *)controller
+- (void) addCocktailDidSuccess:(AddCocktailTableViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:^{
         //todo : addRequest and refresh
+    }];
+}
+
+#pragma mark - Protocol FilterTableViewControllerDelegate
+
+
+- (void) filterCocktailDidCancel:(FilterTableViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void) filterCocktailDidSuccess:(FilterTableViewController *)controller
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        //todo : filterRequest and refresh
     }];
 }
 

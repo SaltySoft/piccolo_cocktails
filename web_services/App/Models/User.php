@@ -27,6 +27,12 @@
 class User extends UserBase
 {
 
+    public  function  __construct()
+    {
+       $this->favorites = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+
     /**
      * @Id @GeneratedValue(strategy="AUTO") @Column(type="integer")
      */
@@ -45,7 +51,7 @@ class User extends UserBase
 
 
     /**
-     * @ManyToMany(targetEntity="Cocktail", mappedBy="users")
+     * @ManyToMany(targetEntity="Cocktail", inversedBy="users")
      */
     private $favorites;
 
@@ -81,6 +87,15 @@ class User extends UserBase
         return $this->favorites;
     }
 
+    public function addFavorite($cocktail)
+    {
+        $this->favorites->add($cocktail);
+    }
+
+    public function removeFavorite($cocktail)
+    {
+        $this->favorites = array_diff($this->favorites, array($cocktail));
+    }
 
 
 

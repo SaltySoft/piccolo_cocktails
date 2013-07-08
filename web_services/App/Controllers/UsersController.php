@@ -52,18 +52,6 @@ class UsersController extends Controller
         }
     }
 
-//    function login($params = array())
-//    {
-//        if (isset($_POST["name"]) && isset($_POST["password"])) {
-//            $users = User::where(array("name" => $_POST["name"], "hash" => sha1($_POST["password"])));
-//            if (count($users) > 0) {
-//                $user = $users[0];
-//                $user->login();
-//            }
-//        }
-//
-//        $this->redirect("/");
-//    }
 
     function logout($params = array())
     {
@@ -117,66 +105,6 @@ class UsersController extends Controller
         }
     }
 
-//    function create($params = array())
-//    {
-//        $user = new User();
-//        $usernames = User::where(array("name" => $_POST["name"]));
-//        $usermail = User::where(array("email" => $_POST["mail"]));
-//        if (count($usernames) == 0 && count($usermail) == 0)
-//        {
-//            $user->setName($_POST["name"]);
-//            $user->setMail($_POST["mail"]);
-//            $users = User::where(array("admin" => 1));
-//            if (count($users) == 0) {
-//                $user->setAdmin();
-//            }
-//            else
-//            {
-//                $user->setNormal();
-//            }
-//
-//            $user->setHash($_POST["password"]);
-//            $user->save();
-//            $user->login();
-//            $this->redirect("/");
-//        }
-//        else
-//        {
-//            $this->flash("This user already exists");
-//            $this->redirect("/Users/login_form");
-//            //error user exists
-//        }
-//    }
-
-
-
-    function add($params = array())
-    {
-        /*
-         * This code would keep users to create their own account once an admin has created his account.
-         *
-        $admin_created = true;
-        $user = User::current_user();
-        if ($user != null) {
-            if (!$user->isAdmin()) {
-                $this->redirect("/");
-            }
-
-        }
-        else
-        {
-            $users = User::where(array("admin" => 1));
-            if (count($users) > 0) {
-                $this->redirect("/");
-            }
-            else
-            {
-                $admin_created = false;
-            }
-        }
-        $this->set("message", $admin_created);
-        */
-    }
 
     public function favorites($params = array())
     {
@@ -218,8 +146,10 @@ class UsersController extends Controller
             && isset($data["token"]) && $data["token"] == $_SESSION["token"]))
         {
             $user = User::find($data["id"]);
-//            $user->getFavorites()->add($data["id"],)
-            if ($user != null) {
+            $cocktail = Cocktail::find($data["cocktail_id"]);
+            if ($user != null && $cocktail != null) {
+                $user->addFavorite($cocktail);
+                $user->save();
                 $favorites = array();
                 foreach ($user->getFavorites() as $favorite)
                 {
@@ -250,8 +180,10 @@ class UsersController extends Controller
         if (isset($data["id"]) && isset($data["token"]) && $data["token"] == $_SESSION["token"])
         {
             $user = User::find($data["id"]);
-//            $user->getFavorites()->add($data["id"])
-            if ($user != null) {
+            $cocktail = Cocktail::find($data["cocktail_id"]);
+            if ($user != null && $cocktail != null) {
+                $user->removeFavorite($cocktail);
+                $user->save();
                 $favorites = array();
                 foreach ($user->getFavorites() as $favorite)
                 {

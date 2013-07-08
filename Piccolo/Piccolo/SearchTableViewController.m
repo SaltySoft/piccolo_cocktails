@@ -9,7 +9,7 @@
 #import "SearchTableViewController.h"
 #import "Ingredient.h"
 #import "CocktailsByIngredientTableViewController.h"
-#import "CocktailRequest.m"
+#import "CocktailRequest.h"
 
 @interface SearchTableViewController ()
 
@@ -19,6 +19,7 @@
 
 @synthesize ingredients = _ingredients;
 @synthesize selectedIngredients = _selectedIngredients;
+@synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,17 +33,30 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (void) hideSearchButton
+{
+    self.navigationItem.rightBarButtonItem = nil;
 }
 
 
+
 - (IBAction)searchAction:(id)sender {
-    NSDictionary* ingredientsDic = nil;
-    [CocktailRequest cocktailsByIngredients:ingredientsDic OnCompletion:^(NSArray* array, NSError* error) {
+    NSMutableDictionary* ingredientsDic = [[NSMutableDictionary alloc] init];
+    
+    NSInteger index = 0;
+    NSInteger numberOfIng = 1;
+    for (Ingredient* ing in self.ingredients) {
+        BOOL isIngredientSelected = [[_selectedIngredients objectAtIndex:index] boolValue];
+        if (isIngredientSelected) {
+            [ingredientsDic setValue:[NSString stringWithFormat:@"%d",ing.id] forKey:[NSString stringWithFormat:@"ingredient%d",numberOfIng]];
+            numberOfIng++;
+        }
+        index++;
+    }
+    [CocktailRequest getCocktailListOnCompletion:^(NSArray* array, NSError* error) {
+//    [CocktailRequest cocktailsByIngredients:ingredientsDic OnCompletion:^(NSArray* array, NSError* error) {
         dispatch_async(dispatch_get_main_queue(), ^(){
             UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
             CocktailsByIngredientTableViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"CocktailsByIngredients"];
@@ -89,44 +103,6 @@
     return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
 #pragma mark - Table view delegate
 
@@ -140,6 +116,19 @@
         [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
     }
     [_selectedIngredients replaceObjectAtIndex:indexPath.row withObject:[NSNumber numberWithBool:!isIngredientSelected]];
+    
+    if (self.delegate != nil) {
+        NSMutableArray* ingredientsSelected = [[NSMutableArray alloc] init];
+        NSInteger index = 0;
+        for (Ingredient* ing in self.ingredients) {
+            BOOL isIngredientSelected = [[_selectedIngredients objectAtIndex:index] boolValue];
+            if (isIngredientSelected) {
+                [ingredientsSelected addObject:ing];
+            }
+            index++;
+        }
+        [_delegate passIngredients:ingredientsSelected];
+    }
 }
 
 @end
