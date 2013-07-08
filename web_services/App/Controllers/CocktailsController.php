@@ -70,11 +70,13 @@ class CocktailsController extends Controller
         $em = Model::getEntityManager();
 
         $qb = $em->createQueryBuilder();
-
-//        $qb->select("c")
-//            ->from("Cocktail", "c")
-//            ->join("Ingredient")
-//            ->where("c.ingredient_id","?1");
+        $ingredient1 = Ingredients::find(1);
+        $qb->andWhere("i = :ingredient1")
+            ->setParameter("ingredient1", $ingredient1);
+        $qb->select("c")
+            ->from("Cocktail", "c")
+            ->innerJoin("c.ingredients", "i")
+            ->where("i = ingredient1");
 
         $cocktails = $qb->getQuery()->getResult();
         echo json_encode($cocktails->toArray());
