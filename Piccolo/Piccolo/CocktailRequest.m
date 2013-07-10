@@ -46,7 +46,7 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:backgroundQueue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError * error) {
-                               if (complete && data != nil) {
+                               if (complete) {
                                    complete(data, error);
                                }
                            }];
@@ -81,14 +81,18 @@
 {
     [RequestHandler getAsynchronousRequestToPath:path
                                     onCompletion:^(NSData * data, NSError *cocktailError){
-                                        NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                        NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
-                                        for (NSDictionary* cocktailDic in requestResult) {
-                                            Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
-                                            [cocktailArray addObject:c];
-                                        }
-                                        if (complete) {
-                                            complete(cocktailArray, cocktailError);
+                                        if (data) {
+                                            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                            NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                                            for (NSDictionary* cocktailDic in requestResult) {
+                                                Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                                                [cocktailArray addObject:c];
+                                            }
+                                            if (complete) {
+                                                complete(cocktailArray, cocktailError);
+                                            }
+                                        } else {
+                                            complete(nil, cocktailError);
                                         }
                                     }];
 }
@@ -104,18 +108,23 @@
     NSInteger userId = appDelegate.user.id;
     NSString* token = appDelegate.token;
     [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/favorites?id=%d&token=%@", SERVER_URL, userId, token]
-                                    onCompletion:^(NSData * data, NSError *cocktailError){
-                                        NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                        NSDictionary* cocktailsResult = [requestResult objectForKey:@"favorites"];
-                                        NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
-                                        for (NSDictionary* cocktailDic in cocktailsResult) {
-                                            Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
-                                            [cocktailArray addObject:c];
-                                        }
-                                        if (complete) {
-                                            complete(cocktailArray, cocktailError);
-                                        }
-                                    }];
+                                    onCompletion:^(NSData * data, NSError *cocktailError)
+    {
+        if (data) {
+            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+            NSDictionary* cocktailsResult = [requestResult objectForKey:@"favorites"];
+            NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+            for (NSDictionary* cocktailDic in cocktailsResult) {
+                Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                [cocktailArray addObject:c];
+            }
+            if (complete) {
+                complete(cocktailArray, cocktailError);
+            }
+        } else {
+            complete(nil, cocktailError);
+        }
+    }];
 }
 
 
@@ -123,13 +132,18 @@
 {
     [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/Random", SERVER_URL]
                                     onCompletion:^(NSData * data, NSError *cocktailError){
-                                        NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                        Cocktail* c = [CocktailRequest parseCocktailDic:requestResult];
-                                        if (complete && cocktailError == nil) {
-                                            complete(c, cocktailError);
+                                        if (data) {
+                                            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                            Cocktail* c = [CocktailRequest parseCocktailDic:requestResult];
+                                            if (complete && cocktailError == nil) {
+                                                complete(c, cocktailError);
+                                            } else {
+                                                complete(nil, cocktailError);
+                                            }
                                         } else {
                                             complete(nil, cocktailError);
                                         }
+
                                     }];
 }
 
@@ -137,15 +151,19 @@
 {
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/byIngredients", SERVER_URL] withParams:ingredients
                                      onCompletion:^(NSData *data, NSError *cocktailError){
-                                        NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                        NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
-                                        for (NSDictionary* cocktailDic in requestResult) {
-                                            Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
-                                            [cocktailArray addObject:c];
-                                        }
-                                        if (complete) {
-                                            complete(cocktailArray, cocktailError);
-                                        }
+                                         if (data) {
+                                             NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                             NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                                             for (NSDictionary* cocktailDic in requestResult) {
+                                                 Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                                                 [cocktailArray addObject:c];
+                                             }
+                                             if (complete) {
+                                                 complete(cocktailArray, cocktailError);
+                                             }
+                                         } else {
+                                             complete(nil, cocktailError);
+                                         }
      }];
 }
 
@@ -154,15 +172,20 @@
 {
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/filter", SERVER_URL] withParams:filterDic
                                      onCompletion:^(NSData *data, NSError *cocktailError){
-                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                         NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
-                                         for (NSDictionary* cocktailDic in requestResult) {
-                                             Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
-                                             [cocktailArray addObject:c];
+                                         if (data) {
+                                             NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                             NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                                             for (NSDictionary* cocktailDic in requestResult) {
+                                                 Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                                                 [cocktailArray addObject:c];
+                                             }
+                                             if (complete) {
+                                                 complete(cocktailArray, cocktailError);
+                                             }
+                                         } else {
+                                             complete(nil, cocktailError);
                                          }
-                                         if (complete) {
-                                             complete(cocktailArray, cocktailError);
-                                         }
+
                                      }];
 }
 
@@ -172,16 +195,21 @@
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/create", SERVER_URL]
                                         withParams:cocktailDic
                                      onCompletion:^(NSData *data, NSError *cocktailError){
-                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                         NSDictionary* cocktailResult = [requestResult objectForKey:@"cocktail"];
-                                         NSString* token = [requestResult objectForKey:@"token"];
-                                         if (cocktailResult != nil && token != nil) {
-                                             Cocktail* c = [CocktailRequest parseCocktailDic:cocktailResult];
-                                             complete(c, token, nil);
+                                         if (data) {
+                                             NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                             NSDictionary* cocktailResult = [requestResult objectForKey:@"cocktail"];
+                                             NSString* token = [requestResult objectForKey:@"token"];
+                                             if (cocktailResult != nil && token != nil) {
+                                                 Cocktail* c = [CocktailRequest parseCocktailDic:cocktailResult];
+                                                 complete(c, token, nil);
+                                             } else {
+                                                 NSString* errorMsg = [requestResult objectForKey:@"error"];
+                                                 complete (nil, nil, errorMsg);
+                                             }
                                          } else {
-                                             NSString* errorMsg = [requestResult objectForKey:@"error"];
-                                             complete (nil, nil, errorMsg);
+                                             complete (nil, nil, @"Connection failed");
                                          }
+ 
                                      }];
 }
 
@@ -193,15 +221,20 @@
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/destroy", SERVER_URL]
                                        withParams:cocktailDic
                                      onCompletion:^(NSData *data, NSError *cocktailError){
-                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                         NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
-                                         for (NSDictionary* cocktailDic in requestResult) {
-                                             Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
-                                             [cocktailArray addObject:c];
+                                         if (data) {
+                                             NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                             NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                                             for (NSDictionary* cocktailDic in requestResult) {
+                                                 Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                                                 [cocktailArray addObject:c];
+                                             }
+                                             if (complete) {
+                                                 complete(cocktailArray, cocktailError);
+                                             }
+                                         } else {
+                                             complete(nil, cocktailError);
                                          }
-                                         if (complete) {
-                                             complete(cocktailArray, cocktailError);
-                                         }
+
                                      }];
 }
 

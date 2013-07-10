@@ -107,13 +107,15 @@
     else if (item.tag == 3) {
         [CocktailRequest getFavoritesListOnCompletion:^(NSArray * favorites, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
-//                if (<#condition#>) {
-//                    <#statements#>
-//                }
+                if (favorites == nil || err != nil) {
+                    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [alert show];
+                } else {
                     UINavigationController* nc = [self.viewControllers objectAtIndex:3];
                     FavoriteTableViewController* ct = [nc.viewControllers objectAtIndex:0];
                     ct.cocktails = [NSMutableArray arrayWithArray:favorites];
                     [ct reloadData];
+                }
             });
         }];
     }

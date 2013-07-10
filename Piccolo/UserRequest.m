@@ -26,16 +26,21 @@
 + (void) createUserWithUser:(NSDictionary*)userDic onCompletion:(RequestUserCompletionHandler) complete
 {
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/create", SERVER_URL]
-                                       withParams:userDic onCompletion:^(NSData* data, NSError* error){
-                                           NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-                                           NSDictionary* userDicRes = [requestResult objectForKey:@"user"];
-                                           NSString* token = [requestResult objectForKey:@"token"];
-                                           if (userDicRes != nil && token != nil) {
-                                               User* u = [UserRequest parseCocktailDic:userDicRes];
-                                               complete (u,token, nil);
+                                       withParams:userDic onCompletion:^(NSData* data, NSError* error)
+    {
+                                           if (data) {
+                                               NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+                                               NSDictionary* userDicRes = [requestResult objectForKey:@"user"];
+                                               NSString* token = [requestResult objectForKey:@"token"];
+                                               if (userDicRes != nil && token != nil) {
+                                                   User* u = [UserRequest parseCocktailDic:userDicRes];
+                                                   complete (u,token, nil);
+                                               } else {
+                                                   NSString* errorMsg = [requestResult objectForKey:@"error"];
+                                                   complete (nil, nil, errorMsg);
+                                               }
                                            } else {
-                                               NSString* errorMsg = [requestResult objectForKey:@"error"];
-                                               complete (nil, nil, errorMsg);
+                                               complete (nil, nil, @"Connection failed");
                                            }
     }];
 }
@@ -44,32 +49,45 @@
 + (void) loginUserWithUser:(NSDictionary*)userDic onCompletion:(RequestUserCompletionHandler) complete
 {
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/login", SERVER_URL]
-                                       withParams:userDic onCompletion:^(NSData* data, NSError* error){
-                                           NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-                                           NSDictionary* userDicRes = [requestResult objectForKey:@"user"];
-                                           NSString* token = [requestResult objectForKey:@"token"];
-                                           if (userDicRes != nil && token != nil) {
-                                               User* u = [UserRequest parseCocktailDic:userDicRes];
-                                               complete (u,token, nil);
+                                       withParams:userDic onCompletion:^(NSData* data, NSError* error)
+    {
+                                           if (data) {
+                                               NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+                                               NSDictionary* userDicRes = [requestResult objectForKey:@"user"];
+                                               NSString* token = [requestResult objectForKey:@"token"];
+                                               if (userDicRes != nil && token != nil) {
+                                                   User* u = [UserRequest parseCocktailDic:userDicRes];
+                                                   complete (u,token, nil);
+                                               } else {
+                                                   NSString* errorMsg = [requestResult objectForKey:@"error"];
+                                                   complete (nil, nil, errorMsg);
+                                               }
                                            } else {
-                                               NSString* errorMsg = [requestResult objectForKey:@"error"];
-                                               complete (nil, nil, errorMsg);
+                                               complete (nil, nil, @"Connection failed");
+
                                            }
+
     }];
 }
 
 + (void) logoutUserOnCompletion: (RequestStringCompletionHandler) complete
 {
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/logout", SERVER_URL]
-                                       withParams:[[NSDictionary alloc] init] onCompletion:^(NSData* data, NSError* error){
-                                           NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-                                           NSString* response = [requestResult objectForKey:@"message"];
-                                           if (error == nil) {
-                                               complete(response,nil);
-                                           } else {
-                                               complete(response,error);
-                                           }
-                                       }];
+                                       withParams:[[NSDictionary alloc] init] onCompletion:^(NSData* data, NSError* error)
+    {
+        if (data) {
+            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+            NSString* response = [requestResult objectForKey:@"message"];
+            if (error == nil) {
+                complete(response,nil);
+            } else {
+                complete(response,error);
+            }
+        } else {
+            complete(nil,error);
+        }
+
+    }];
 }
 
 
@@ -85,22 +103,26 @@
     [dic setObject:token forKey:@"token"];
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/addFavorite", SERVER_URL]
                                        withParams:dic
-                                     onCompletion:^(NSData* data, NSError* cocktailError){
-                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                         NSDictionary* cocktailsResult = [requestResult objectForKey:@"favorites"];
-                                         NSString* token = [requestResult objectForKey:@"token"];
-                                         if (cocktailsResult != nil && token != nil) {
-                                             NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
-                                             for (NSDictionary* cocktailDic in cocktailsResult) {
-                                                 Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
-                                                 [cocktailArray addObject:c];
-                                             }
-                                             complete(cocktailArray, token, nil);
-                                         } else {
-                                             NSString* errorMsg = [requestResult objectForKey:@"error"];
-                                             complete (nil, nil, errorMsg);
-                                         }
-                                         
+                                     onCompletion:^(NSData* data, NSError* cocktailError)
+    {
+        if (data) {
+            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+            NSDictionary* cocktailsResult = [requestResult objectForKey:@"favorites"];
+            NSString* token = [requestResult objectForKey:@"token"];
+            if (cocktailsResult != nil && token != nil) {
+                NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                for (NSDictionary* cocktailDic in cocktailsResult) {
+                    Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                    [cocktailArray addObject:c];
+                }
+                complete(cocktailArray, token, nil);
+            } else {
+                NSString* errorMsg = [requestResult objectForKey:@"error"];
+                complete (nil, nil, errorMsg);
+            }
+        } else {
+            complete (nil, nil, @"Connection failed");
+        }
     }];
 }
 
@@ -115,21 +137,26 @@
     [dic setObject:token forKey:@"token"];
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Users/removeFavorite", SERVER_URL]
                                        withParams:dic
-                                     onCompletion:^(NSData* data, NSError* cocktailError){
-                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                         NSDictionary* cocktailsResult = [requestResult objectForKey:@"favorites"];
-                                         NSString* token = [requestResult objectForKey:@"token"];
-                                         if (cocktailsResult != nil && token != nil) {
-                                             NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
-                                             for (NSDictionary* cocktailDic in cocktailsResult) {
-                                                 Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
-                                                 [cocktailArray addObject:c];
-                                             }
-                                             complete(cocktailArray, token, nil);
-                                         } else {
-                                             NSString* errorMsg = [requestResult objectForKey:@"error"];
-                                             complete (nil, nil, errorMsg);
-                                     }
+                                     onCompletion:^(NSData* data, NSError* cocktailError)
+    {
+        if (data) {
+            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+            NSDictionary* cocktailsResult = [requestResult objectForKey:@"favorites"];
+            NSString* token = [requestResult objectForKey:@"token"];
+            if (cocktailsResult != nil && token != nil) {
+                NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                for (NSDictionary* cocktailDic in cocktailsResult) {
+                    Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                    [cocktailArray addObject:c];
+                }
+                complete(cocktailArray, token, nil);
+            } else {
+                NSString* errorMsg = [requestResult objectForKey:@"error"];
+                complete (nil, nil, errorMsg);
+            }
+        } else {
+            complete (nil, nil, @"Connection failed");
+        }
     }];
 }
 

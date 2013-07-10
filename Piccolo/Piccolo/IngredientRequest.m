@@ -17,20 +17,24 @@
     [RequestHandler getAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Ingredients", SERVER_URL]
                                     onCompletion:^(NSData * data, NSError *ingredientError)
     {
-        NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data
-                                                                      options:NSJSONReadingMutableLeaves
-                                                                        error:&ingredientError];
-                                        NSMutableArray* ingredientArray = [[NSMutableArray alloc] init];
-                                        for (NSDictionary* ingredientDic in requestResult) {
-                                            Ingredient* ing = [[Ingredient alloc]
-                                                                initWithId:[[ingredientDic objectForKey:@"id"] intValue]
-                                                                  andName:[ingredientDic objectForKey:@"name"]];
-                                            [ingredientArray addObject:ing];
-                                        }
-                                        if (complete) {
-                                            complete(ingredientArray, ingredientError);
-                                        }
-                                    }];
+        if (data) {
+            NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data
+                                                                          options:NSJSONReadingMutableLeaves
+                                                                            error:&ingredientError];
+            NSMutableArray* ingredientArray = [[NSMutableArray alloc] init];
+            for (NSDictionary* ingredientDic in requestResult) {
+                Ingredient* ing = [[Ingredient alloc]
+                                   initWithId:[[ingredientDic objectForKey:@"id"] intValue]
+                                   andName:[ingredientDic objectForKey:@"name"]];
+                [ingredientArray addObject:ing];
+            }
+            if (complete) {
+                complete(ingredientArray, ingredientError);
+            }
+        } else {
+            complete(nil, ingredientError);
+        }
+    }];
 
 }
 

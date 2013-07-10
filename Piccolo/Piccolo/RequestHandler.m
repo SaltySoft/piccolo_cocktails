@@ -15,14 +15,14 @@
     NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]
                                                                 cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
-                                                            timeoutInterval:10];
+                                                            timeoutInterval:3];
     [request setHTTPMethod:@"GET"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:backgroundQueue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError * error) {
-                               if (complete && data != nil) {
+                               if (complete) {
                                    complete(data, error);
                                }
                            }];
@@ -37,7 +37,7 @@
     NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]
                                                                 cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
-                                                            timeoutInterval:10];
+                                                            timeoutInterval:3];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -45,7 +45,7 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:backgroundQueue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError * error) {
-                               if (complete && data != nil) {
+                               if (complete) {
                                    complete(data, error);
                                }
                            }];
@@ -58,7 +58,7 @@
     NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]
                                                                 cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
-                                                            timeoutInterval:10];
+                                                            timeoutInterval:3];
     [request setHTTPMethod:@"PUT"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
@@ -66,7 +66,7 @@
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:backgroundQueue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError * error) {
-                               if (complete && data != nil) {
+                               if (complete) {
                                    complete(data, error);
                                }
                            }];
@@ -76,14 +76,14 @@
     NSOperationQueue *backgroundQueue = [[NSOperationQueue alloc] init];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:path]
                                                                 cachePolicy:NSURLCacheStorageAllowedInMemoryOnly
-                                                            timeoutInterval:10];
+                                                            timeoutInterval:3];
     [request setHTTPMethod:@"DELETE"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [NSURLConnection sendAsynchronousRequest:request
                                        queue:backgroundQueue
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError * error) {
-                               if (complete && data != nil) {
+                               if (complete) {
                                    complete(data, error);
                                }
                            }];

@@ -126,7 +126,6 @@
 
     [dic setValue:[NSString stringWithFormat:@"%d",[super alchool]]forKey:@"alchohol"];
     [dic setValue:token forKey:@"token"];
-    NSLog(@"%@",[super ingredients]);
     if ([[super ingredients] count] != 0) {
         NSMutableArray* ingredientIds = [[NSMutableArray alloc] init];
         for (Ingredient* ing in [super ingredients]) {

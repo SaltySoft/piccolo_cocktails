@@ -10,6 +10,9 @@
 		AD392EEC1764838A00D38E22 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD392EEB1764838A00D38E22 /* Tools.m */; };
 		AD392EF01764C0DB00D38E22 /* CountDownDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD392EEF1764C0DB00D38E22 /* CountDownDelegate.m */; };
 		AD4B0B60178CF17500569D0C /* delete.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4B0B5F178CF17500569D0C /* delete.png */; };
+		AD4B0B65178DEE6D00569D0C /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4B0B64178DEE6D00569D0C /* iTunesArtwork.png */; };
+		AD4B0B68178DEFA700569D0C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4B0B66178DEFA700569D0C /* Icon.png */; };
+		AD4B0B69178DEFA700569D0C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4B0B67178DEFA700569D0C /* Icon@2x.png */; };
 		AD746251178B830300090DD3 /* no_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = AD746250178B830300090DD3 /* no_picture.png */; };
 		AD746254178B8A1B00090DD3 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD746253178B8A1B00090DD3 /* TextViewController.m */; };
 		AD75507D175E348600FBD43C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD75507C175E348600FBD43C /* UIKit.framework */; };
@@ -40,7 +43,6 @@
 		ADBB1A6C175F84F900B465E1 /* Cocktail.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A6B175F84F900B465E1 /* Cocktail.m */; };
 		ADBB1A6F175F86CA00B465E1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A6E175F86CA00B465E1 /* User.m */; };
 		ADBB1A72176087C200B465E1 /* Ingredient.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A71176087C200B465E1 /* Ingredient.m */; };
-		ADBB1A751760921B00B465E1 /* mojito.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ADBB1A741760921B00B465E1 /* mojito.jpg */; };
 		ADBB1A781760BA8200B465E1 /* FilterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A771760BA8200B465E1 /* FilterTableViewController.m */; };
 		ADBB1A7C1760C4F700B465E1 /* DifficultyDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A7B1760C4F700B465E1 /* DifficultyDelegate.m */; };
 		ADBB1A7F1760C56300B465E1 /* OriginalityDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB1A7E1760C56300B465E1 /* OriginalityDelegate.m */; };
@@ -67,6 +69,9 @@
 		AD392EEE1764C0DB00D38E22 /* CountDownDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownDelegate.h; sourceTree = "<group>"; };
 		AD392EEF1764C0DB00D38E22 /* CountDownDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownDelegate.m; sourceTree = "<group>"; };
 		AD4B0B5F178CF17500569D0C /* delete.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = delete.png; sourceTree = "<group>"; };
+		AD4B0B64178DEE6D00569D0C /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
+		AD4B0B66178DEFA700569D0C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		AD4B0B67178DEFA700569D0C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		AD746250178B830300090DD3 /* no_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_picture.png; sourceTree = "<group>"; };
 		AD746252178B8A1A00090DD3 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
 		AD746253178B8A1B00090DD3 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
@@ -108,7 +113,6 @@
 		ADBB1A6E175F86CA00B465E1 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		ADBB1A70176087C200B465E1 /* Ingredient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ingredient.h; sourceTree = "<group>"; };
 		ADBB1A71176087C200B465E1 /* Ingredient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ingredient.m; sourceTree = "<group>"; };
-		ADBB1A741760921B00B465E1 /* mojito.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = mojito.jpg; sourceTree = "<group>"; };
 		ADBB1A761760BA8200B465E1 /* FilterTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterTableViewController.h; sourceTree = "<group>"; };
 		ADBB1A771760BA8200B465E1 /* FilterTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterTableViewController.m; sourceTree = "<group>"; };
 		ADBB1A7A1760C4F700B465E1 /* DifficultyDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DifficultyDelegate.h; sourceTree = "<group>"; };
@@ -203,7 +207,6 @@
 				ADBB1A8E1761D92E00B465E1 /* Tools */,
 				ADBB1A871760F49300B465E1 /* Cells */,
 				ADBB1A831760F2CD00B465E1 /* RequestHandler */,
-				ADBB1A73176091FE00B465E1 /* sample */,
 				AD392EED1764838F00D38E22 /* Tools */,
 				ADBB1A69175F844900B465E1 /* Models */,
 				ADBB1A56175F7CBE00B465E1 /* Controllers */,
@@ -219,6 +222,9 @@
 		AD755083175E348600FBD43C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AD4B0B66178DEFA700569D0C /* Icon.png */,
+				AD4B0B67178DEFA700569D0C /* Icon@2x.png */,
+				AD4B0B64178DEE6D00569D0C /* iTunesArtwork.png */,
 				AD755084175E348600FBD43C /* Piccolo-Info.plist */,
 				AD755085175E348600FBD43C /* InfoPlist.strings */,
 				AD755088175E348600FBD43C /* main.m */,
@@ -293,12 +299,12 @@
 			isa = PBXGroup;
 			children = (
 				ADBB1A791760C49B00B465E1 /* Delegates */,
-				ADDDDE6E1788C3DB00B541B4 /* CocktailViewController.h */,
-				ADDDDE6F1788C3DB00B541B4 /* CocktailViewController.m */,
 				ADB8C07E176726B700369584 /* Search */,
 				ADB8C07D176726AE00369584 /* Favorites */,
 				ADB8C07C1767268000369584 /* Cocktails */,
 				ADCD0FFE17666D6400986A7D /* Authentification */,
+				ADDDDE6E1788C3DB00B541B4 /* CocktailViewController.h */,
+				ADDDDE6F1788C3DB00B541B4 /* CocktailViewController.m */,
 				ADBB1A801760E7AE00B465E1 /* TabBarController.h */,
 				ADBB1A811760E7AE00B465E1 /* TabBarController.m */,
 			);
@@ -316,14 +322,6 @@
 				ADBB1A71176087C200B465E1 /* Ingredient.m */,
 			);
 			name = Models;
-			sourceTree = "<group>";
-		};
-		ADBB1A73176091FE00B465E1 /* sample */ = {
-			isa = PBXGroup;
-			children = (
-				ADBB1A741760921B00B465E1 /* mojito.jpg */,
-			);
-			name = sample;
 			sourceTree = "<group>";
 		};
 		ADBB1A791760C49B00B465E1 /* Delegates */ = {
@@ -451,13 +449,15 @@
 				AD7550C2175E440100FBD43C /* User@2X.png in Resources */,
 				AD7550C5175E450800FBD43C /* search.png in Resources */,
 				AD7550C6175E450800FBD43C /* search@2X.png in Resources */,
-				ADBB1A751760921B00B465E1 /* mojito.jpg in Resources */,
 				ADCD0FFD17661BC000986A7D /* account_cocktail.png in Resources */,
 				ADB8C08317672CCC00369584 /* star_empty.png in Resources */,
 				ADB8C08417672CCC00369584 /* star_full.png in Resources */,
 				ADDDDE781788D43000B541B4 /* login_cocktails.png in Resources */,
 				AD746251178B830300090DD3 /* no_picture.png in Resources */,
 				AD4B0B60178CF17500569D0C /* delete.png in Resources */,
+				AD4B0B65178DEE6D00569D0C /* iTunesArtwork.png in Resources */,
+				AD4B0B68178DEFA700569D0C /* Icon.png in Resources */,
+				AD4B0B69178DEFA700569D0C /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

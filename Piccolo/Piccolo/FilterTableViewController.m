@@ -113,7 +113,6 @@
     }
     [filter setValue:[NSString stringWithFormat:@"%d", [super alchool]] forKey:@"alchohol"];
     
-    NSLog(@"%@",filter);
     [CocktailRequest cocktailsFilter:filter OnCompletion:^(NSArray* cocktails, NSError* error) {
         dispatch_async(dispatch_get_main_queue(), ^(){
             if (error == nil && cocktails != nil) {
