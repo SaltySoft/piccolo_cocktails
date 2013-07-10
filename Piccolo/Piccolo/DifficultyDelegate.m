@@ -43,7 +43,7 @@
 }
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [_delegate setDifficulty:[self.difficulties objectAtIndex:self.selectedRow]];
+    [_delegate setDifficultyString:[self.difficulties objectAtIndex:self.selectedRow] andDifficultyInt:self.selectedRow];
 }
 
 

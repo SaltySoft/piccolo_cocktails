@@ -10,7 +10,7 @@
 
 @protocol PassDifficulty <NSObject>
 
-- (void) setDifficulty: (NSString*) difficulty;
+- (void) setDifficultyString: (NSString*) difficulty andDifficultyInt: (NSInteger) difficultyInt;
 
 @end
 

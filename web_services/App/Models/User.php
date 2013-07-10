@@ -94,7 +94,7 @@ class User extends UserBase
 
     public function removeFavorite($cocktail)
     {
-        $this->favorites = array_diff($this->favorites, array($cocktail));
+        $this->favorites->removeElement($cocktail);
     }
 
 

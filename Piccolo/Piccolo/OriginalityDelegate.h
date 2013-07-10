@@ -10,7 +10,7 @@
 
 @protocol PassOriginality <NSObject>
 
-- (void) setOriginality: (NSString*) originality;
+- (void) setOriginality: (NSString*) originality andOriginalityInt: (NSInteger) originalityInt;
 
 
 @end

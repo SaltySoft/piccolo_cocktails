@@ -44,7 +44,7 @@
 
 - (void) actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [_delegate setOriginality:[self.originalities objectAtIndex:self.selectedRow]];
+    [_delegate setOriginality:[self.originalities objectAtIndex:self.selectedRow] andOriginalityInt:self.selectedRow];
 }
 
 @end

@@ -27,6 +27,11 @@
 class Cocktail extends Model
 {
 
+    public function __construct()
+    {
+        $this->ingredients = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
     /**
      * @Id @GeneratedValue(strategy="AUTO") @Column(type="integer")
      */
@@ -79,7 +84,7 @@ class Cocktail extends Model
     private $picture_url;
 
     /**
-     * @ManyToMany(targetEntity="Ingredient", mappedBy="cocktails")
+     * @ManyToMany(targetEntity="Ingredient", inversedBy="cocktails")
      */
     private $ingredients;
 
@@ -91,7 +96,7 @@ class Cocktail extends Model
     /**
      * @Column(type="boolean")
      */
-    private $alchool;
+    private $alchohol;
 
 
     public function getId()
@@ -185,14 +190,19 @@ class Cocktail extends Model
         return $this->recipe;
     }
 
-    public function setAlchool($alchool)
+    public function setAlchohol($alchohol)
     {
-        $this->alchool = $alchool;
+        $this->alchohol = $alchohol;
     }
 
-    public function getAlchool()
+    public function getAlchohol()
     {
-        return $this->alchool;
+        return $this->$alchohol;
+    }
+
+    public function addIngredient($ingredient)
+    {
+        $this->ingredients->add($ingredient);
     }
 
     public function toArray()
@@ -215,7 +225,7 @@ class Cocktail extends Model
         $array["recipe"] = $this->recipe;
         $array["ingredients"] = $ingredients;
         $array["picture_url"] = $this->picture_url;
-        $array["alchool"] = $this->alchool;
+        $array["alchohol"] = $this->alchohol;
 
         return $array;
     }

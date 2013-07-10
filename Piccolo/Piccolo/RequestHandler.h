@@ -13,6 +13,8 @@
 typedef void (^RequestCompletionHandler)(NSData*, NSError* );
 typedef void (^RequestStringCompletionHandler)(NSString*, NSError* );
 typedef void (^RequestDataCompletionHandler)(NSArray*, NSError* );
+typedef void (^RequestArrayCompletionHandlerWithErrors)(NSArray*,NSString*, NSString*);
+
 
 
 @interface RequestHandler : NSObject
@@ -21,5 +23,7 @@ typedef void (^RequestDataCompletionHandler)(NSArray*, NSError* );
 + (void) postAsynchronousRequestToPath:(NSString*)path withParams: (NSDictionary*) params onCompletion:(RequestCompletionHandler) complete;
 + (void) putAsynchronousRequestToPath:(NSString*)path withParams: (NSDictionary*) params onCompletion:(RequestCompletionHandler) complete;
 + (void) deleteAsynchronousRequestToPath:(NSString*)path onCompletion:(RequestCompletionHandler) complete;
+
+
 
 @end

@@ -64,11 +64,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    if (![appDelegate isAuthenticated]) {
-        self.navigationItem.leftBarButtonItem = nil;
-
-    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -95,7 +90,12 @@
     Cocktail* c = [_cocktails objectAtIndex:indexPath.row];
     cell.name.text = [c name];
     cell.difficulty.text = [c difficulty];
-    cell.image.image = [c picture];
+    if (c.picture) {
+        cell.image.image = [c picture];
+    } else {
+        NSString *no_picture = [[NSBundle mainBundle] pathForResource:@"no_picture" ofType:@"png"];
+        cell.image.image = [[UIImage alloc] initWithContentsOfFile:no_picture];
+    }
 
     return cell;
 }
@@ -135,10 +135,11 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void) addCocktailDidSuccess:(AddCocktailTableViewController *)controller
+- (void) addCocktailDidSuccess:(AddCocktailTableViewController *)controller cocktail:(Cocktail*) cocktail;
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        //todo : addRequest and refresh
+        [_cocktails addObject:cocktail];
+        [self.tableView reloadData];
     }];
 }
 
@@ -150,10 +151,11 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void) filterCocktailDidSuccess:(FilterTableViewController *)controller
+- (void) filterCocktailDidSuccess:(FilterTableViewController *)controller RefreshCocktails:(NSArray*) cocktails
 {
     [self dismissViewControllerAnimated:YES completion:^{
-        //todo : filterRequest and refresh
+        self.cocktails = [[NSMutableArray alloc] initWithArray:cocktails];
+        [self.tableView reloadData];
     }];
 }
 

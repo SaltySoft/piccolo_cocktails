@@ -28,9 +28,9 @@
             return @"Commun";
         case 1:
             return @"Classic";
-        case 3:
+        case 2:
             return @"Famous";
-        case 4:
+        case 3:
             return @"Original";
         default:
             return @"Creative";

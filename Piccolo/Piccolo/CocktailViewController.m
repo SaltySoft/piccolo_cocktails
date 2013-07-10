@@ -9,6 +9,8 @@
 #import "CocktailViewController.h"
 #import "Cocktail.h"
 #import "AppDelegate.h"
+#import "CocktailRequest.h"
+#import "UserRequest.h"
 
 @interface CocktailViewController ()
 
@@ -41,17 +43,43 @@
 
 - (void) addFavoriteButton
 {
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.favoriteStar
-                                                                     style:UIBarButtonSystemItemBookmarks
-                                                                     target:self
-                                                                     action:@selector(favoriteAction)];
+    [CocktailRequest getFavoritesListOnCompletion:^(NSArray* favorites, NSError* error) {
+        dispatch_async(dispatch_get_main_queue(), ^(){
+            if (favorites != nil && error == nil) {
+                for (Cocktail* c in favorites) {
+                    if (_cocktail.id == c.id) {
+                        self.isFavorite = YES;
+                        break;
+                    }
+                }
+                if (self.isFavorite) {
+                    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.favoriteStar
+                                                                                              style:UIBarButtonSystemItemBookmarks
+                                                                                             target:self
+                                                                                             action:@selector(favoriteAction)];
+                } else {
+                    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.notFavoriteStar
+                                                                                              style:UIBarButtonSystemItemBookmarks
+                                                                                             target:self
+                                                                                            action:@selector(favoriteAction)];
+                }
+            }
+        });
+    }];
+    
+
 }
 
 - (void) setViewAttributes
 {
     self.isFavorite = NO;
     self.titleLabel.text = _cocktail.name;
-    self.image.image = _cocktail.picture;
+    if (_cocktail.picture == nil) {
+        NSString *no_picture = [[NSBundle mainBundle] pathForResource:@"no_picture" ofType:@"png"];
+        self.image.image = [[UIImage alloc] initWithContentsOfFile:no_picture];
+    } else {
+        self.image.image = _cocktail.picture;
+    }
     [self.textView setAttributedText:[self textViewStringForRecipesAndDescription]];
     self.originalityLabel.text = [_cocktail originality];
     self.difficultyLabel.text = [_cocktail difficulty];
@@ -125,17 +153,26 @@
 - (void) favoriteAction {
     self.navigationItem.rightBarButtonItem = nil;
     if (self.isFavorite) {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.notFavoriteStar
-                                                                                  style:UIBarButtonSystemItemBookmarks
-                                                                                 target:self
-                                                                                 action:@selector(favoriteAction)];
+        [UserRequest removeFavoriteforCocktailId:_cocktail.id OnCompletion:^(NSArray* array,NSString* token, NSString* error) {
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.notFavoriteStar
+                                                                                          style:UIBarButtonSystemItemBookmarks
+                                                                                         target:self
+                                                                                         action:@selector(favoriteAction)];
+                self.isFavorite = NO;
+            });
+        }];
     } else {
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.favoriteStar
-                                                                                  style:UIBarButtonSystemItemBookmarks
-                                                                                 target:self
-                                                                                 action:@selector(favoriteAction)];
+        [UserRequest addFavoriteforCocktailId:_cocktail.id OnCompletion:^(NSArray* array, NSString* token, NSString* error) {
+            dispatch_async(dispatch_get_main_queue(), ^(){
+                self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:self.favoriteStar
+                                                                                          style:UIBarButtonSystemItemBookmarks
+                                                                                         target:self
+                                                                                        action:@selector(favoriteAction)];
+                self.isFavorite = YES;
+            });
+        }];
     }
-    self.isFavorite = !self.isFavorite;
 }
 
 

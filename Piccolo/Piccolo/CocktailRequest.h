@@ -13,8 +13,14 @@
 @class Cocktail;
 
 typedef void (^RequestCocktailCompletionHandler)(Cocktail*, NSError* );
+typedef void (^RequestCocktailCompletionHandlerWithErrors)(Cocktail*,NSString*, NSString*);
+
 
 @interface CocktailRequest : NSObject
+
++ (Cocktail*) parseCocktailDic:(NSDictionary*) cocktailDic;
+
++ (void) getCocktailListFromPath:(NSString*)path OnCompletion:(RequestDataCompletionHandler) complete;
 
 + (void) getCocktailOfTheDayOnCompletion:(RequestCocktailCompletionHandler) complete;
 
@@ -24,5 +30,13 @@ typedef void (^RequestCocktailCompletionHandler)(Cocktail*, NSError* );
 
 + (void) cocktailsByIngredients:(NSDictionary*) ingredients OnCompletion:(RequestDataCompletionHandler) complete;
 
++ (void) addCocktail:(NSDictionary*) cocktailDic OnCompletion:(RequestCocktailCompletionHandlerWithErrors) complete;
+
++ (void) cocktailsFilter:(NSDictionary*) filterDic OnCompletion:(RequestDataCompletionHandler) complete;
+
++ (void) postImageAsynchronousRequestToPath:(NSString*)path Image: (UIImage*) image onCompletion:(RequestCompletionHandler) complete;
+
 
 @end
+
+

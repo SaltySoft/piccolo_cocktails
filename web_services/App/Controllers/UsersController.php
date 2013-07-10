@@ -142,10 +142,10 @@ class UsersController extends Controller
         header("Content-type: application/json");
         $data = $this->getRequestData();
         $success = false;
-        if (isset($data["cocktail_id"])  && (isset($data["id"])
+        if (isset($data["cocktail_id"])  && (isset($data["user_id"])
             && isset($data["token"]) && $data["token"] == $_SESSION["token"]))
         {
-            $user = User::find($data["id"]);
+            $user = User::find($data["user_id"]);
             $cocktail = Cocktail::find($data["cocktail_id"]);
             if ($user != null && $cocktail != null) {
                 $user->addFavorite($cocktail);
@@ -166,7 +166,7 @@ class UsersController extends Controller
         {
             header("HTTP/1.1 401 Unauthorized");
             echo json_encode(array(
-                "error"=> "You are not authenticated",
+                "error"=> "You are not authenticated"
             ));
         }
     }
@@ -177,9 +177,9 @@ class UsersController extends Controller
         header("Content-type: application/json");
         $data = $this->getRequestData();
         $success = false;
-        if (isset($data["id"]) && isset($data["token"]) && $data["token"] == $_SESSION["token"])
+        if (isset($data["user_id"]) && isset($data["token"]) && $data["token"] == $_SESSION["token"])
         {
-            $user = User::find($data["id"]);
+            $user = User::find($data["user_id"]);
             $cocktail = Cocktail::find($data["cocktail_id"]);
             if ($user != null && $cocktail != null) {
                 $user->removeFavorite($cocktail);
@@ -200,7 +200,7 @@ class UsersController extends Controller
         {
             header("HTTP/1.1 401 Unauthorized");
             echo json_encode(array(
-                "error"=> "You are not authenticated",
+                "error"=> "You are not authenticated"
             ));
         }
     }

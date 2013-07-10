@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		AD392EEC1764838A00D38E22 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = AD392EEB1764838A00D38E22 /* Tools.m */; };
 		AD392EF01764C0DB00D38E22 /* CountDownDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD392EEF1764C0DB00D38E22 /* CountDownDelegate.m */; };
+		AD746251178B830300090DD3 /* no_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = AD746250178B830300090DD3 /* no_picture.png */; };
+		AD746254178B8A1B00090DD3 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD746253178B8A1B00090DD3 /* TextViewController.m */; };
 		AD75507D175E348600FBD43C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD75507C175E348600FBD43C /* UIKit.framework */; };
 		AD75507F175E348600FBD43C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD75507E175E348600FBD43C /* Foundation.framework */; };
 		AD755081175E348600FBD43C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD755080175E348600FBD43C /* CoreGraphics.framework */; };
@@ -63,6 +65,9 @@
 		AD392EEB1764838A00D38E22 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		AD392EEE1764C0DB00D38E22 /* CountDownDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountDownDelegate.h; sourceTree = "<group>"; };
 		AD392EEF1764C0DB00D38E22 /* CountDownDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountDownDelegate.m; sourceTree = "<group>"; };
+		AD746250178B830300090DD3 /* no_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_picture.png; sourceTree = "<group>"; };
+		AD746252178B8A1A00090DD3 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
+		AD746253178B8A1B00090DD3 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
 		AD755079175E348600FBD43C /* Piccolo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Piccolo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD75507C175E348600FBD43C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AD75507E175E348600FBD43C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -226,6 +231,7 @@
 		AD7550BA175E3FEA00FBD43C /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				AD746250178B830300090DD3 /* no_picture.png */,
 				ADDDDE771788D43000B541B4 /* login_cocktails.png */,
 				ADB8C08117672CCC00369584 /* star_empty.png */,
 				ADB8C08217672CCC00369584 /* star_full.png */,
@@ -254,6 +260,8 @@
 				ADC643FE178A3DEC00AD463D /* AddCocktailTableViewController.m */,
 				ADC64400178A49F300AD463D /* CocktailAttributesViewController.h */,
 				ADC64401178A49F300AD463D /* CocktailAttributesViewController.m */,
+				AD746252178B8A1A00090DD3 /* TextViewController.h */,
+				AD746253178B8A1B00090DD3 /* TextViewController.m */,
 			);
 			name = Cocktails;
 			sourceTree = "<group>";
@@ -445,6 +453,7 @@
 				ADB8C08317672CCC00369584 /* star_empty.png in Resources */,
 				ADB8C08417672CCC00369584 /* star_full.png in Resources */,
 				ADDDDE781788D43000B541B4 /* login_cocktails.png in Resources */,
+				AD746251178B830300090DD3 /* no_picture.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,6 +490,7 @@
 				ADC643F9178A104300AD463D /* CocktailsByIngredientTableViewController.m in Sources */,
 				ADC643FF178A3DEC00AD463D /* AddCocktailTableViewController.m in Sources */,
 				ADC64402178A49F400AD463D /* CocktailAttributesViewController.m in Sources */,
+				AD746254178B8A1B00090DD3 /* TextViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

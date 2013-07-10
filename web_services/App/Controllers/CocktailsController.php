@@ -32,33 +32,115 @@ class CocktailsController extends Controller
 
     public function create()
     {
-        $data = $this->getRequestData();
-
-        $cocktail = new Cocktail();
-        $cocktail->setName($data["name"]);
-        $cocktail->setDifficulty($data["difficulty"]);
-        $cocktail->setOriginality($data["originality"]);
-        $cocktail->setDuration($data["duration"]);
-        $cocktail->setDescription($data["description"]);
-        $cocktail->setRecipe($data["recipe"]);
-        if (isset($data["author"])) {
-            $cocktail->setAuthor($data["author"]);
-        }
-        $cocktail->save();
         $this->render = false;
         header("Content-type: application/json");
-
-        echo json_encode($cocktail->toArray());
+        $data = $this->getRequestData();
+        if (isset($data["token"]) && $data["token"] == $_SESSION["token"] || 1)
+        {
+            $cocktail = new Cocktail();
+            $cocktail->setName($data["name"]);
+            $cocktail->setDifficulty($data["difficulty"]);
+            $cocktail->setOriginality($data["originality"]);
+            $cocktail->setDuration($data["duration"]);
+            $cocktail->setDescription($data["description"]);
+            $cocktail->setRecipe($data["recipe"]);
+            $cocktail->setPictureUrl($data["picture_url"]);
+            $cocktail->setAlchohol($data["alchohol"]);
+            if (isset($data["author"])) {
+                $author = User::find($data["author"]);
+                $cocktail->setAuthor($author);
+            }
+            $ingredientsIds = $data["ingredients_ids"];
+            foreach ($ingredientsIds as $ingId)
+            {
+                $ingredient = Ingredient::find($ingId);
+                $cocktail->addIngredient($ingredient);
+            }
+            $cocktail->save();
+            echo json_encode(array(
+                    "cocktail" =>  $cocktail->toArray(),
+                    "token" => $_SESSION["token"])
+            );
+        } else {
+            header("HTTP/1.1 401 Unauthorized");
+            echo json_encode(array(
+                "error"=> "You are not authenticated"
+            ));
+        }
     }
 
     public function show($params = array())
     {
         $this->render = false;
         header("Content-type: application/json");
-
         $cocktail = Cocktail::find($params["id"]);
 
         echo json_encode($cocktail->toArray());
+    }
+
+    public function addPicture($params = array())
+    {
+        $this->render = false;
+        $url = ImageComponent::saveSentPicture("file");
+        header("Content-type: application/json");
+        echo json_encode(array( "url_picture" => $url));
+    }
+
+    public function filter($params = array())
+    {
+        $this->render = false;
+        header("Content-type: application/json");
+        $em = Model::getEntityManager();
+        $qb = $em->createQueryBuilder();
+        $data = $this->getRequestData();
+
+        $qb->select("c")
+            ->from("Cocktail", "c")
+            ->join("c.ingredients", "i");
+
+        $i = 0;
+        if (isset($data["ingredient_ids"])) {
+            foreach ($data["ingredient_ids"] as $ingredient_id) {
+
+                $qb->andWhere("i.id = :ingredient".$i)
+                    ->setParameter("ingredient".$i, $ingredient_id);
+                $i++;
+            }
+        }
+        if (isset($data["name"])) {
+            $qb->andWhere("c.name LIKE :name")
+                ->setParameter("name", "%".$data["name"]."%");
+        }
+
+        if (isset($data["difficulty"])) {
+            $qb->andWhere("c.difficulty = :difficulty")
+                ->setParameter("difficulty", $data["difficulty"]);
+        }
+
+        if (isset($data["duration"])) {
+            $qb->andWhere("c.duration <= :duration")
+                ->setParameter("duration", $data["duration"]);
+        }
+
+        if (isset($data["originality"])) {
+            $qb->andWhere("c.originality = :originality")
+                ->setParameter("originality", $data["originality"]);
+        }
+
+        if (isset($data["alchohol"])) {
+            $qb->andWhere("c.alchohol = :alchohol")
+                ->setParameter("alchohol", $data["alchohol"]);
+        }
+
+        $cocktails = $qb->getQuery()->getResult();
+        $result = array();
+        foreach ($cocktails as $cocktail)
+        {
+            $result[] = $cocktail->toArray();
+        }
+
+        echo json_encode($result);
+
     }
 
     public function byIngredients($params = array())
@@ -66,20 +148,31 @@ class CocktailsController extends Controller
         $this->render = false;
         header("Content-type: application/json");
 
-        echo json_encode($params);
         $em = Model::getEntityManager();
 
         $qb = $em->createQueryBuilder();
-        $ingredient1 = Ingredients::find(1);
-        $qb->andWhere("i = :ingredient1")
-            ->setParameter("ingredient1", $ingredient1);
+        $data = $this->getRequestData();
+
         $qb->select("c")
             ->from("Cocktail", "c")
-            ->innerJoin("c.ingredients", "i")
-            ->where("i = ingredient1");
+            ->join("c.ingredients", "i");
+
+        $i = 0;
+        foreach ($data["ingredient_ids"] as $ingredient_id) {
+
+            $qb->andWhere("i.id = :ingredient".$i)
+                ->setParameter("ingredient".$i, $ingredient_id);
+            $i++;
+        }
 
         $cocktails = $qb->getQuery()->getResult();
-        echo json_encode($cocktails->toArray());
+        $result = array();
+        foreach ($cocktails as $cocktail)
+        {
+            $result[] = $cocktail->toArray();
+        }
+
+        echo json_encode($result);
     }
 
     public function update()

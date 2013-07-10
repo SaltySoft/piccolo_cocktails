@@ -15,6 +15,8 @@
 @end
 
 @implementation CocktailAttributesViewController
+@synthesize alchool = _alchool;
+@synthesize countDown = _countDown;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -35,6 +37,7 @@
     self.difficultyDelegate = [[DifficultyDelegate alloc] init];
     self.originalityDelegate = [[OriginalityDelegate alloc] init];
     self.countDownDelegate = [[CountDownDelegate alloc] init];
+    self.countDown = 2;
 
 }
 

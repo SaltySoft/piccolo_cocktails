@@ -23,7 +23,7 @@ class Ingredient extends Model
     private $name;
 
     /**
-     * @ManyToMany(targetEntity="Cocktail", inversedBy="ingredients")
+     * @ManyToMany(targetEntity="Cocktail", mappedBy="ingredients")
      */
     private $cocktails;
 
@@ -60,4 +60,10 @@ class Ingredient extends Model
     {
         return $this->cocktails;
     }
+
+    public function addCocktail($cocktail)
+    {
+        $this->cocktails->add($cocktail);
+    }
+
 }

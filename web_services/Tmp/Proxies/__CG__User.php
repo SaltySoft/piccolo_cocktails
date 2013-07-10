@@ -75,6 +75,24 @@ class User extends \User implements \Doctrine\ORM\Proxy\Proxy
         return parent::getName();
     }
 
+    public function getFavorites()
+    {
+        $this->__load();
+        return parent::getFavorites();
+    }
+
+    public function addFavorite($cocktail)
+    {
+        $this->__load();
+        return parent::addFavorite($cocktail);
+    }
+
+    public function removeFavorite($cocktail)
+    {
+        $this->__load();
+        return parent::removeFavorite($cocktail);
+    }
+
     public function toArray()
     {
         $this->__load();

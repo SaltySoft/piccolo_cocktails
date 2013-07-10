@@ -70,8 +70,12 @@
     Cocktail* c = [_cocktails objectAtIndex:indexPath.row];
     cell.name.text = [c name];
     cell.difficulty.text = [c difficulty];
-    cell.image.image = [c picture];
-    
+    if (c.picture) {
+        cell.image.image = [c picture];
+    } else {
+        NSString *no_picture = [[NSBundle mainBundle] pathForResource:@"no_picture" ofType:@"png"];
+        cell.image.image = [[UIImage alloc] initWithContentsOfFile:no_picture];
+    }
     return cell;
 }
 

@@ -18,12 +18,15 @@
 
 @property (nonatomic, retain) id<FilterCocktailViewControllerDelegate> delegate;
 
-
+@property NSInteger difficultyInt;
+@property NSInteger originalityInt;
+@property NSInteger preparationInt;
 
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *difficultyField;
 @property (weak, nonatomic) IBOutlet UITextField *preparationField;
 @property (weak, nonatomic) IBOutlet UITextField *originalityField;
+
 
 
 - (IBAction)cancelAction:(id)sender;
@@ -36,6 +39,6 @@
 @protocol FilterCocktailViewControllerDelegate <NSObject>
 
 - (void) filterCocktailDidCancel:(FilterTableViewController *)controller;
-- (void) filterCocktailDidSuccess:(FilterTableViewController *)controller;
+- (void) filterCocktailDidSuccess:(FilterTableViewController *)controller RefreshCocktails:(NSArray*) cocktails;
 
 @end

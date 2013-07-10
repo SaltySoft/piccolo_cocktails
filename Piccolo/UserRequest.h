@@ -21,4 +21,9 @@ typedef void (^RequestUserCompletionHandler)(User*,NSString*, NSString*);
 
 + (void) logoutUserOnCompletion: (RequestStringCompletionHandler) complete;
 
++ (void) addFavoriteforCocktailId: (NSInteger) cocktail_id OnCompletion:(RequestArrayCompletionHandlerWithErrors) complete;
+
++ (void) removeFavoriteforCocktailId: (NSInteger) cocktail_id OnCompletion:(RequestArrayCompletionHandlerWithErrors) complete;
+
+
 @end

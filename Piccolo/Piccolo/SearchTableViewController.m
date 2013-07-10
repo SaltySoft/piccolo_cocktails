@@ -47,16 +47,17 @@
     
     NSInteger index = 0;
     NSInteger numberOfIng = 1;
+    NSMutableArray* ingredientKeys = [[NSMutableArray alloc] init];
     for (Ingredient* ing in self.ingredients) {
         BOOL isIngredientSelected = [[_selectedIngredients objectAtIndex:index] boolValue];
         if (isIngredientSelected) {
-            [ingredientsDic setValue:[NSString stringWithFormat:@"%d",ing.id] forKey:[NSString stringWithFormat:@"ingredient%d",numberOfIng]];
+            [ingredientKeys addObject:[NSString stringWithFormat:@"%d",ing.id]];
             numberOfIng++;
         }
         index++;
     }
-    [CocktailRequest getCocktailListOnCompletion:^(NSArray* array, NSError* error) {
-//    [CocktailRequest cocktailsByIngredients:ingredientsDic OnCompletion:^(NSArray* array, NSError* error) {
+    [ingredientsDic setValue:ingredientKeys forKey:@"ingredient_ids"];
+    [CocktailRequest cocktailsByIngredients:ingredientsDic OnCompletion:^(NSArray* array, NSError* error) {
         dispatch_async(dispatch_get_main_queue(), ^(){
             UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
             CocktailsByIngredientTableViewController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"CocktailsByIngredients"];
