@@ -11,6 +11,9 @@
 #import "AppDelegate.h"
 #import "CocktailRequest.h"
 #import "UserRequest.h"
+#import "TabBarController.h"
+#import "LoginViewController.h"
+#import "User.h"
 
 @interface CocktailViewController ()
 
@@ -30,6 +33,27 @@
 - (void) setTitle:(NSString*) title;
 {
     self.navigationItem.title = title;
+}
+
+- (IBAction)deleteAction:(id)sender {
+    [CocktailRequest deleteCocktail:_cocktail.id OnCompletion:^(NSArray *cocktails, NSError* error)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^()
+        {
+            if (error == nil && cocktails != nil) {
+                UIStoryboard * mainStoryBoard = [UIStoryboard storyboardWithName:@"MainStoryboard" bundle:nil];
+                TabBarController *vc = [mainStoryBoard instantiateViewControllerWithIdentifier:@"homeController"];
+                [self presentViewController:vc animated:NO completion:^{
+                    vc.selectedIndex = 4;
+                    UINavigationController* nc = [vc.viewControllers objectAtIndex:4];
+                    LoginViewController* ct = [nc.viewControllers objectAtIndex:0];
+                    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                    User* currentUser = [appDelegate user];
+                    [ct pushLoggeControllerWithUsername:currentUser.username];
+                }];
+            }
+        });
+    }];
 }
 
 - (void)viewDidLoad
@@ -66,12 +90,41 @@
             }
         });
     }];
-    
+}
 
+- (void) viewDidDisappear:(BOOL)animated
+{
+    self.view = nil;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (self.canRemove) {
+        if (self.scrollView.contentOffset.y > 330) {
+            [self performSelector:@selector(hideScrollView:) withObject:self.scrollView afterDelay:2.5];
+        }
+    } else {
+        self.deleteButton.hidden = YES;
+        if (self.scrollView.contentOffset.y > 330) {
+            [UIView animateWithDuration:0.3 animations:^{
+                [scrollView setContentOffset: CGPointMake(self.scrollView.contentOffset.x , 330) ];
+            }];
+        }
+    }
+}
+
+- (void) hideScrollView:(UIScrollView*) scrollView
+{
+    if (self.scrollView.contentOffset.y > 330) {
+        [UIView animateWithDuration:0.3 animations:^{
+            [scrollView setContentOffset: CGPointMake(self.scrollView.contentOffset.x , 330) ];
+        }];
+    }
 }
 
 - (void) setViewAttributes
 {
+    self.canRemove = NO;
     self.isFavorite = NO;
     self.titleLabel.text = _cocktail.name;
     if (_cocktail.picture == nil) {
@@ -86,7 +139,11 @@
     self.preparationLabel.text = [NSString stringWithFormat:@"%d minutes",_cocktail.duration];
     AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     if ([appDelegate isAuthenticated]) {
+        User* currentUser = [appDelegate user];
         [self addFavoriteButton];
+        if (self.cocktail.author_id == currentUser.id) {
+            self.canRemove = YES;
+        }
     } else {
         self.navigationItem.rightBarButtonItem = nil;
     }

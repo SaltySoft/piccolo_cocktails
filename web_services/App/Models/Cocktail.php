@@ -221,6 +221,7 @@ class Cocktail extends Model
         $array["originality"] = $this->originality;
         $array["duration"] = $this->duration;
         $array["author"] = $this->author != null ? $this->author->getName() : "";
+        $array["author_id"] = $this->author != null ? $this->author->getId() : "";
         $array["description"] = $this->description;
         $array["recipe"] = $this->recipe;
         $array["ingredients"] = $ingredients;

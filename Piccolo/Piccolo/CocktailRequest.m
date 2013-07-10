@@ -68,6 +68,7 @@
                                    originality:orStr
                                       duration:[[cocktailDic objectForKey:@"duration"] intValue]
                                        creator:[cocktailDic objectForKey:@"author"]
+                                     author_id:[[cocktailDic objectForKey:@"author_id"] intValue]
                                           name:[cocktailDic objectForKey:@"name"]
                                    description:[cocktailDic objectForKey:@"description"]
                                         recipe:[cocktailDic objectForKey:@"recipe"]
@@ -154,7 +155,6 @@
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/filter", SERVER_URL] withParams:filterDic
                                      onCompletion:^(NSData *data, NSError *cocktailError){
                                          NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                         NSLog(@"filter %@", filterDic);
                                          NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
                                          for (NSDictionary* cocktailDic in requestResult) {
                                              Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
@@ -172,10 +172,7 @@
     [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/create", SERVER_URL]
                                         withParams:cocktailDic
                                      onCompletion:^(NSData *data, NSError *cocktailError){
-                                         NSString* html = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                         NSLog(@"%@",html);
                                          NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
-                                         NSLog(@"%@",requestResult);
                                          NSDictionary* cocktailResult = [requestResult objectForKey:@"cocktail"];
                                          NSString* token = [requestResult objectForKey:@"token"];
                                          if (cocktailResult != nil && token != nil) {
@@ -184,6 +181,26 @@
                                          } else {
                                              NSString* errorMsg = [requestResult objectForKey:@"error"];
                                              complete (nil, nil, errorMsg);
+                                         }
+                                     }];
+}
+
++ (void) deleteCocktail:(NSInteger) cocktailId OnCompletion:(RequestDataCompletionHandler) complete
+{
+    NSMutableDictionary* cocktailDic = [[NSMutableDictionary alloc] init];
+    [cocktailDic setValue:[NSString stringWithFormat:@"%d",cocktailId] forKey:@"author_id"];
+    
+    [RequestHandler postAsynchronousRequestToPath:[NSString stringWithFormat:@"%s/Cocktails/destroy", SERVER_URL]
+                                       withParams:cocktailDic
+                                     onCompletion:^(NSData *data, NSError *cocktailError){
+                                         NSDictionary* requestResult = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&cocktailError];
+                                         NSMutableArray* cocktailArray = [[NSMutableArray alloc] init];
+                                         for (NSDictionary* cocktailDic in requestResult) {
+                                             Cocktail* c = [CocktailRequest parseCocktailDic:cocktailDic];
+                                             [cocktailArray addObject:c];
+                                         }
+                                         if (complete) {
+                                             complete(cocktailArray, cocktailError);
                                          }
                                      }];
 }

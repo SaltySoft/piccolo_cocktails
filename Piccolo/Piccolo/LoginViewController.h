@@ -19,4 +19,7 @@
 
 - (IBAction)loginAction:(id)sender;
 
+- (void) pushLoggeControllerWithUsername: (NSString*) username;
+
+
 @end

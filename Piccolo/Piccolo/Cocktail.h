@@ -17,7 +17,9 @@
 
 @property NSInteger duration;
 
+@property NSInteger author_id;
 @property (nonatomic, retain) NSString* creator;
+
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSString* description;
 @property (nonatomic, retain) NSString* recipe;
@@ -30,7 +32,8 @@
      difficulty:(NSString *)difficulty
      originality:(NSString *)originality
        duration:(NSInteger)duration
-        creator:(NSString *)creator
+        creator:(NSString*) creator
+      author_id:(NSInteger) author_id
           name:(NSString *)name
     description:(NSString *)description
          recipe:(NSString *)recipe

@@ -15,6 +15,7 @@
 @synthesize originality = _originality;
 @synthesize difficulty = _difficulty;
 @synthesize duration = _duration;
+@synthesize author_id = _author_id;
 @synthesize creator = _creator;
 
 @synthesize name = _name;
@@ -29,7 +30,8 @@
     difficulty:(NSString *)difficulty
     originality:(NSString *)originality
     duration:(NSInteger)duration
-    creator:(NSString *)creator
+    creator:(NSString*) creator
+    author_id:(NSInteger) author_id
     name:(NSString *)name
     description:(NSString *)description
     recipe:(NSString *)recipe
@@ -42,6 +44,7 @@
         _difficulty = difficulty;
         _originality = originality;
         _duration = duration;
+        _author_id = author_id;
         _creator = creator;
         _name = name;
         _description = description;

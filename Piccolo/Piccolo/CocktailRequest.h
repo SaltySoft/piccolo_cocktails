@@ -36,6 +36,8 @@ typedef void (^RequestCocktailCompletionHandlerWithErrors)(Cocktail*,NSString*, 
 
 + (void) postImageAsynchronousRequestToPath:(NSString*)path Image: (UIImage*) image onCompletion:(RequestCompletionHandler) complete;
 
++ (void) deleteCocktail:(NSInteger) cocktailId OnCompletion:(RequestDataCompletionHandler) complete;
+
 
 @end
 

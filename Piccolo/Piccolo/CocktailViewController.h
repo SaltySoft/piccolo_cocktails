@@ -22,9 +22,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *difficultyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *preparationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *originalityLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
 @property BOOL isFavorite;
+
+@property BOOL canRemove;
+
 
 - (void) favoriteAction;
 
@@ -32,5 +37,6 @@
 
 - (void) setTitle:(NSString*) title;
 
+- (IBAction)deleteAction:(id)sender;
 
 @end

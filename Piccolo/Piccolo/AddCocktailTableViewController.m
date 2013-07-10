@@ -122,6 +122,8 @@
     [dic setValue:self.description forKey:@"description"];
     [dic setValue:self.recipe forKey:@"recipe"];
     [dic setValue:self.url forKey:@"picture_url"];
+    [dic setValue:[NSString stringWithFormat:@"%d", user.id] forKey:@"author"];
+
     [dic setValue:[NSString stringWithFormat:@"%d",[super alchool]]forKey:@"alchohol"];
     [dic setValue:token forKey:@"token"];
     NSLog(@"%@",[super ingredients]);

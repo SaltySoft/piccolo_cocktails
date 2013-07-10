@@ -61,7 +61,7 @@
     if (item.tag == 0) {
         [CocktailRequest getCocktailOfTheDayOnCompletion:^(Cocktail* c, NSError * error){
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (c == nil) {
+                if (c == nil || error != nil) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alert show];
                 } else {
@@ -77,7 +77,7 @@
     else if (item.tag == 1) {
         [CocktailRequest getCocktailListOnCompletion:^(NSArray * cocktails, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (cocktails == nil) {
+                if (cocktails == nil || err != nil) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alert show];
                 } else {
@@ -92,7 +92,7 @@
     else if (item.tag == 2) {
         [IngredientRequest getIngredientListOnCompletion:^(NSArray * ingredients, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
-                if (ingredients == nil) {
+                if (ingredients == nil || err != nil) {
                     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Failed" message:@"You must be connected to use this app." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
                     [alert show];
                 } else {
@@ -107,6 +107,9 @@
     else if (item.tag == 3) {
         [CocktailRequest getFavoritesListOnCompletion:^(NSArray * favorites, NSError* err){
             dispatch_async(dispatch_get_main_queue(), ^{
+//                if (<#condition#>) {
+//                    <#statements#>
+//                }
                     UINavigationController* nc = [self.viewControllers objectAtIndex:3];
                     FavoriteTableViewController* ct = [nc.viewControllers objectAtIndex:0];
                     ct.cocktails = [NSMutableArray arrayWithArray:favorites];

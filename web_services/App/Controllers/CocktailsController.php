@@ -182,7 +182,38 @@ class CocktailsController extends Controller
 
     public function destroy()
     {
+        $this->render = false;
+        header("Content-type: application/json");
+        $data = $this->getRequestData();
+        if (isset($data["token"]) && $data["token"] == $_SESSION["token"] || 1)
+        {
+            if (isset($data["author_id"])) {
+                $cocktail = Cocktail::find($data["author_id"]);
+                $cocktail->delete();
 
+                $em = Model::getEntityManager();
+
+                $qb = $em->createQueryBuilder();
+
+                $qb->select("c")
+                    ->from("Cocktail", "c");
+
+                $cocktails = $qb->getQuery()->getResult();
+                $response = array();
+                foreach ($cocktails as $cocktail)
+                {
+                    $response[] = $cocktail->toArray();
+                }
+
+                echo json_encode($response);
+
+            }
+        } else {
+            header("HTTP/1.1 401 Unauthorized");
+            echo json_encode(array(
+                "error"=> "You are not authenticated"
+            ));
+        }
     }
 
     public function random()

@@ -52,7 +52,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bF6-kQ-gPV">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="bF6-kQ-gPV">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="FEG-de-b3g"/>
                                             </constraints>
@@ -526,7 +526,7 @@
         <!--Navigation Controller - Account-->
         <scene sceneID="oEO-BB-oO0">
             <objects>
-                <navigationController definesPresentationContext="YES" id="GAr-PD-9Bx" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="" definesPresentationContext="YES" id="GAr-PD-9Bx" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="4" title="Account" image="User.png" id="2ao-jj-HCI"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackOpaque" id="FIZ-3D-5jb">
                         <autoresizingMask key="autoresizingMask"/>
@@ -598,7 +598,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jgo-hi-RhF">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="jgo-hi-RhF">
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="Kba-pC-kYK"/>
                                                 <constraint firstAttribute="height" constant="70" id="tNm-53-TOT"/>
@@ -668,7 +668,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="15">
             <objects>
-                <tabBarController id="4" customClass="TabBarController" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="homeController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4" customClass="TabBarController" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5">
                         <rect key="frame" x="0.0" y="431" width="320" height="49"/>
@@ -692,33 +692,28 @@
             <objects>
                 <viewController storyboardIdentifier="cocktailController" title="Detail" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pTf-YC-aaJ" customClass="CocktailViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="r9i-ej-hZB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="700"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="850"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jh8-NM-6ZP">
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="axJ-Kt-UsT">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="scaleToFill" editable="NO" text="-" translatesAutoresizingMaskIntoConstraints="NO" id="axJ-Kt-UsT">
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.90000000000000002" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="237" id="qNN-5T-P0I"/>
+                                            <constraint firstAttribute="height" constant="285" id="YPY-xQ-q19"/>
                                         </constraints>
-                                        <string key="text">• Placer les feuilles de menthe dans le verre, ajoutez le sucre et le jus de citrons. Piler consciencieusement afin d'exprimer l'essence de la menthe sans la broyer. Ajouter le rhum, 4 glaçons et mélangez. Remplir la moitié restante du verre d'eau gazeuse. Mélanger doucement avec une paille. Voila, le Mojito est prêt.
-• Servir dans un verre de type "tumbler". 
-• Décor: Décorer de feuilles de menthe fraîches et d'une tranche de citron.
-• Bien que la recette originale ne contienne pas d'angostura, vous pouvez y ajouter quelques gouttes afin de le rendre un peu plus sec.</string>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="mojito.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="12F-jD-TsY">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" image="no_picture.png" translatesAutoresizingMaskIntoConstraints="NO" id="12F-jD-TsY">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="320" id="J8z-2J-gKC"/>
                                             <constraint firstAttribute="width" constant="320" id="UHc-AQ-ADU"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Classic" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiQ-99-Rtf">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MiQ-99-Rtf">
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="115" id="6s2-1S-FHV"/>
                                             <constraint firstAttribute="height" constant="37" id="Cfs-xx-r7o"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="20"/>
@@ -736,7 +731,6 @@
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Cocktail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JK1-Ac-dUD">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="k2J-HT-T9w"/>
-                                            <constraint firstAttribute="width" constant="285" id="p40-I0-jES"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                         <color key="textColor" red="1" green="0.47453120389999998" blue="0.26359339129999998" alpha="0.92000000000000004" colorSpace="calibratedRGB"/>
@@ -750,7 +744,7 @@
                                         <color key="textColor" red="1" green="0.47453120389999998" blue="0.26359339129999998" alpha="0.92000000000000004" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Very easy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd2-ra-VqB">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fd2-ra-VqB">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="zlE-Oz-Tec"/>
                                         </constraints>
@@ -758,7 +752,7 @@
                                         <color key="textColor" red="1" green="0.47453120389999998" blue="0.26359339129999998" alpha="0.92000000000000004" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="15 minutes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLv-qK-f8V">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLv-qK-f8V">
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="lHF-yX-xky"/>
                                         </constraints>
@@ -766,12 +760,29 @@
                                         <color key="textColor" red="1" green="0.47453120389999998" blue="0.26359339129999998" alpha="0.92000000000000004" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WRt-zf-iRN">
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="vRN-iE-8LU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Delete Cocktail" backgroundImage="delete.png">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="deleteAction:" destination="pTf-YC-aaJ" eventType="touchUpInside" id="Nbb-aA-Ouh"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="MiQ-99-Rtf" firstAttribute="leading" secondItem="hwt-yU-RMZ" secondAttribute="leading" type="default" id="A27-5c-7U9"/>
+                                    <constraint firstAttribute="bottom" secondItem="WRt-zf-iRN" secondAttribute="bottom" constant="20" symbolic="YES" type="default" id="ABX-oN-IEl"/>
                                     <constraint firstItem="12F-jD-TsY" firstAttribute="leading" secondItem="Jh8-NM-6ZP" secondAttribute="leading" type="default" id="Bgz-03-4hL"/>
                                     <constraint firstItem="fd2-ra-VqB" firstAttribute="baseline" secondItem="6bd-Wf-8b7" secondAttribute="baseline" type="default" id="CfC-84-rNR"/>
-                                    <constraint firstItem="6bd-Wf-8b7" firstAttribute="top" secondItem="fd2-ra-VqB" secondAttribute="top" type="default" id="HzH-H8-0Ps"/>
+                                    <constraint firstItem="JK1-Ac-dUD" firstAttribute="centerX" secondItem="axJ-Kt-UsT" secondAttribute="centerX" type="default" id="IFF-Az-aoq"/>
                                     <constraint firstItem="QLv-qK-f8V" firstAttribute="leading" secondItem="Jh8-NM-6ZP" secondAttribute="leading" constant="196" id="Iqm-Eb-dvs"/>
                                     <constraint firstItem="6bd-Wf-8b7" firstAttribute="trailing" secondItem="MiQ-99-Rtf" secondAttribute="trailing" type="default" id="PZM-Vl-aik"/>
                                     <constraint firstItem="MiQ-99-Rtf" firstAttribute="top" secondItem="JK1-Ac-dUD" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Qm9-KA-o1i"/>
@@ -780,22 +791,29 @@
                                     <constraint firstAttribute="trailing" secondItem="JK1-Ac-dUD" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="SVC-AB-2sR"/>
                                     <constraint firstItem="axJ-Kt-UsT" firstAttribute="top" secondItem="hwt-yU-RMZ" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="Ue1-0N-Alb"/>
                                     <constraint firstItem="JK1-Ac-dUD" firstAttribute="top" secondItem="Jh8-NM-6ZP" secondAttribute="top" constant="334" id="VKa-jj-2Un"/>
-                                    <constraint firstItem="axJ-Kt-UsT" firstAttribute="centerX" secondItem="Jh8-NM-6ZP" secondAttribute="centerX" type="default" id="Vqc-Hz-Jgm"/>
                                     <constraint firstItem="MiQ-99-Rtf" firstAttribute="leading" secondItem="JK1-Ac-dUD" secondAttribute="leading" type="default" id="Vr0-yc-haP"/>
+                                    <constraint firstItem="WRt-zf-iRN" firstAttribute="centerX" secondItem="12F-jD-TsY" secondAttribute="centerX" type="default" id="bIC-Tc-Ml9"/>
+                                    <constraint firstItem="fd2-ra-VqB" firstAttribute="top" secondItem="6bd-Wf-8b7" secondAttribute="top" type="default" id="c1g-A6-Ivb"/>
                                     <constraint firstItem="hwt-yU-RMZ" firstAttribute="top" secondItem="QLv-qK-f8V" secondAttribute="top" type="default" id="hWz-fG-pgi"/>
+                                    <constraint firstItem="WRt-zf-iRN" firstAttribute="top" secondItem="Jh8-NM-6ZP" secondAttribute="top" constant="786" id="p9l-Xd-VVt"/>
+                                    <constraint firstItem="JK1-Ac-dUD" firstAttribute="centerX" secondItem="Jh8-NM-6ZP" secondAttribute="centerX" type="default" id="qPR-Fz-2A6"/>
                                     <constraint firstItem="12F-jD-TsY" firstAttribute="top" secondItem="Jh8-NM-6ZP" secondAttribute="top" constant="1" id="qaE-QU-PK8"/>
-                                    <constraint firstItem="axJ-Kt-UsT" firstAttribute="bottom" secondItem="Jh8-NM-6ZP" secondAttribute="bottom" type="default" id="rOg-nH-LMo"/>
                                     <constraint firstItem="hwt-yU-RMZ" firstAttribute="baseline" secondItem="QLv-qK-f8V" secondAttribute="baseline" type="default" id="se5-gN-9dB"/>
                                     <constraint firstItem="6bd-Wf-8b7" firstAttribute="leading" secondItem="Jh8-NM-6ZP" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="v8E-qJ-1rt"/>
                                     <constraint firstItem="axJ-Kt-UsT" firstAttribute="leading" secondItem="Jh8-NM-6ZP" secondAttribute="leading" type="default" id="vSj-Kp-8eC"/>
                                     <constraint firstItem="axJ-Kt-UsT" firstAttribute="trailing" secondItem="Jh8-NM-6ZP" secondAttribute="trailing" type="default" id="vZv-Jx-N97"/>
                                     <constraint firstItem="fd2-ra-VqB" firstAttribute="trailing" secondItem="QLv-qK-f8V" secondAttribute="trailing" type="default" id="wF1-mS-vvu"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="pTf-YC-aaJ" id="PZz-J6-wh4"/>
+                                </connections>
                             </scrollView>
                         </subviews>
+                        <color key="backgroundColor" red="0.15286192602040816" green="0.013233840123540466" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="Jh8-NM-6ZP" firstAttribute="bottom" secondItem="r9i-ej-hZB" secondAttribute="bottom" type="default" id="9h2-2q-o4j"/>
-                            <constraint firstItem="Jh8-NM-6ZP" firstAttribute="top" secondItem="r9i-ej-hZB" secondAttribute="top" type="default" id="ch3-ht-q9u"/>
+                            <constraint firstItem="Jh8-NM-6ZP" firstAttribute="bottom" secondItem="r9i-ej-hZB" secondAttribute="bottom" type="default" id="D0q-vd-vuA"/>
+                            <constraint firstAttribute="trailing" secondItem="Jh8-NM-6ZP" secondAttribute="trailing" constant="-21" id="PKg-lz-chs"/>
+                            <constraint firstItem="Jh8-NM-6ZP" firstAttribute="top" secondItem="r9i-ej-hZB" secondAttribute="top" type="default" id="SnK-nW-Av7"/>
                             <constraint firstItem="Jh8-NM-6ZP" firstAttribute="leading" secondItem="r9i-ej-hZB" secondAttribute="leading" type="default" id="suq-y6-ih1"/>
                         </constraints>
                     </view>
@@ -803,17 +821,19 @@
                     <navigationItem key="navigationItem" title="Cocktail of the day" id="1RD-HG-mJQ"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="deleteButton" destination="WRt-zf-iRN" id="rYm-ye-ogA"/>
                         <outlet property="difficultyLabel" destination="fd2-ra-VqB" id="rCM-5H-r7P"/>
                         <outlet property="image" destination="12F-jD-TsY" id="sAO-hf-mMv"/>
                         <outlet property="originalityLabel" destination="MiQ-99-Rtf" id="Rp5-id-6nr"/>
                         <outlet property="preparationLabel" destination="QLv-qK-f8V" id="TPt-sD-BCl"/>
+                        <outlet property="scrollView" destination="Jh8-NM-6ZP" id="qYv-of-1cJ"/>
                         <outlet property="textView" destination="axJ-Kt-UsT" id="gHu-2z-4YR"/>
                         <outlet property="titleLabel" destination="JK1-Ac-dUD" id="t0O-aU-lHU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CGR-Ts-kEh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="-437"/>
+            <point key="canvasLocation" x="1104" y="-590"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="iay-0f-BPN">
@@ -1002,7 +1022,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="69"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQu-CS-FFO">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="hQu-CS-FFO">
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="70" id="jxG-hX-51Z"/>
                                                 <constraint firstAttribute="width" constant="70" id="roQ-ab-iE0"/>
@@ -1392,8 +1412,8 @@
         <image name="Favorite.png" width="30" height="30"/>
         <image name="User.png" width="30" height="30"/>
         <image name="account_cocktail.png" width="388" height="500"/>
+        <image name="delete.png" width="302" height="42"/>
         <image name="login_cocktails.png" width="406" height="433"/>
-        <image name="mojito.jpg" width="324" height="324"/>
         <image name="no_picture.png" width="400" height="400"/>
         <image name="search.png" width="30" height="30"/>
     </resources>
@@ -1430,10 +1450,13 @@
         <class className="CocktailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CocktailViewController.h"/>
             <relationships>
+                <relationship kind="action" name="deleteAction:"/>
+                <relationship kind="outlet" name="deleteButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="difficultyLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="image" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="originalityLabel" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="preparationLabel" candidateClass="UILabel"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
                 <relationship kind="outlet" name="textView" candidateClass="UITextView"/>
                 <relationship kind="outlet" name="titleLabel" candidateClass="UILabel"/>
             </relationships>
