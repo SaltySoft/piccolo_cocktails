@@ -13,6 +13,7 @@
 		AD4B0B65178DEE6D00569D0C /* iTunesArtwork.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4B0B64178DEE6D00569D0C /* iTunesArtwork.png */; };
 		AD4B0B68178DEFA700569D0C /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4B0B66178DEFA700569D0C /* Icon.png */; };
 		AD4B0B69178DEFA700569D0C /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = AD4B0B67178DEFA700569D0C /* Icon@2x.png */; };
+		AD4B0BF8178DFBF100569D0C /* UserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4B0BF7178DFBF100569D0C /* UserRequest.m */; };
 		AD746251178B830300090DD3 /* no_picture.png in Resources */ = {isa = PBXBuildFile; fileRef = AD746250178B830300090DD3 /* no_picture.png */; };
 		AD746254178B8A1B00090DD3 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD746253178B8A1B00090DD3 /* TextViewController.m */; };
 		AD75507D175E348600FBD43C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD75507C175E348600FBD43C /* UIKit.framework */; };
@@ -57,7 +58,6 @@
 		ADCD0FFD17661BC000986A7D /* account_cocktail.png in Resources */ = {isa = PBXBuildFile; fileRef = ADCD0FFC17661BC000986A7D /* account_cocktail.png */; };
 		ADDDDE701788C3DB00B541B4 /* CocktailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDDDE6F1788C3DB00B541B4 /* CocktailViewController.m */; };
 		ADDDDE781788D43000B541B4 /* login_cocktails.png in Resources */ = {isa = PBXBuildFile; fileRef = ADDDDE771788D43000B541B4 /* login_cocktails.png */; };
-		ADDDDE7B1788E0BF00B541B4 /* UserRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADDDDE7A1788E0BF00B541B4 /* UserRequest.m */; };
 		ADE8179D1765C38000D49DC7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE8179C1765C38000D49DC7 /* LoginViewController.m */; };
 		ADE817A31765C5F900D49DC7 /* LoggedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE817A21765C5F900D49DC7 /* LoggedViewController.m */; };
 		ADE817A61765C6BF00D49DC7 /* RegisterTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE817A51765C6BF00D49DC7 /* RegisterTableViewController.m */; };
@@ -72,6 +72,8 @@
 		AD4B0B64178DEE6D00569D0C /* iTunesArtwork.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iTunesArtwork.png; sourceTree = "<group>"; };
 		AD4B0B66178DEFA700569D0C /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		AD4B0B67178DEFA700569D0C /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		AD4B0BF6178DFBF100569D0C /* UserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserRequest.h; path = Piccolo/UserRequest.h; sourceTree = "<group>"; };
+		AD4B0BF7178DFBF100569D0C /* UserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserRequest.m; path = Piccolo/UserRequest.m; sourceTree = "<group>"; };
 		AD746250178B830300090DD3 /* no_picture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_picture.png; sourceTree = "<group>"; };
 		AD746252178B8A1A00090DD3 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
 		AD746253178B8A1B00090DD3 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
@@ -140,8 +142,6 @@
 		ADDDDE6E1788C3DB00B541B4 /* CocktailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CocktailViewController.h; sourceTree = "<group>"; };
 		ADDDDE6F1788C3DB00B541B4 /* CocktailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CocktailViewController.m; sourceTree = "<group>"; };
 		ADDDDE771788D43000B541B4 /* login_cocktails.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login_cocktails.png; sourceTree = "<group>"; };
-		ADDDDE791788E0BF00B541B4 /* UserRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRequest.h; sourceTree = "<group>"; };
-		ADDDDE7A1788E0BF00B541B4 /* UserRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRequest.m; sourceTree = "<group>"; };
 		ADE8179B1765C38000D49DC7 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		ADE8179C1765C38000D49DC7 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		ADE817A11765C5F900D49DC7 /* LoggedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggedViewController.h; sourceTree = "<group>"; };
@@ -203,7 +203,6 @@
 		AD755082175E348600FBD43C /* Piccolo */ = {
 			isa = PBXGroup;
 			children = (
-				ADCD0FFC17661BC000986A7D /* account_cocktail.png */,
 				ADBB1A8E1761D92E00B465E1 /* Tools */,
 				ADBB1A871760F49300B465E1 /* Cells */,
 				ADBB1A831760F2CD00B465E1 /* RequestHandler */,
@@ -222,6 +221,7 @@
 		AD755083175E348600FBD43C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ADCD0FFC17661BC000986A7D /* account_cocktail.png */,
 				AD4B0B66178DEFA700569D0C /* Icon.png */,
 				AD4B0B67178DEFA700569D0C /* Icon@2x.png */,
 				AD4B0B64178DEE6D00569D0C /* iTunesArtwork.png */,
@@ -340,14 +340,14 @@
 		ADBB1A831760F2CD00B465E1 /* RequestHandler */ = {
 			isa = PBXGroup;
 			children = (
+				AD4B0BF6178DFBF100569D0C /* UserRequest.h */,
+				AD4B0BF7178DFBF100569D0C /* UserRequest.m */,
 				ADCBAF1B1767792C004782EC /* RequestHandler.h */,
 				ADCBAF1C1767792C004782EC /* RequestHandler.m */,
 				ADCBAF1E176779AC004782EC /* CocktailRequest.h */,
 				ADCBAF1F176779AC004782EC /* CocktailRequest.m */,
 				ADCBAF21176779D1004782EC /* IngredientRequest.h */,
 				ADCBAF22176779D1004782EC /* IngredientRequest.m */,
-				ADDDDE791788E0BF00B541B4 /* UserRequest.h */,
-				ADDDDE7A1788E0BF00B541B4 /* UserRequest.m */,
 			);
 			name = RequestHandler;
 			path = ..;
@@ -490,11 +490,11 @@
 				ADCBAF20176779AC004782EC /* CocktailRequest.m in Sources */,
 				ADCBAF23176779D1004782EC /* IngredientRequest.m in Sources */,
 				ADDDDE701788C3DB00B541B4 /* CocktailViewController.m in Sources */,
-				ADDDDE7B1788E0BF00B541B4 /* UserRequest.m in Sources */,
 				ADC643F9178A104300AD463D /* CocktailsByIngredientTableViewController.m in Sources */,
 				ADC643FF178A3DEC00AD463D /* AddCocktailTableViewController.m in Sources */,
 				ADC64402178A49F400AD463D /* CocktailAttributesViewController.m in Sources */,
 				AD746254178B8A1B00090DD3 /* TextViewController.m in Sources */,
+				AD4B0BF8178DFBF100569D0C /* UserRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
